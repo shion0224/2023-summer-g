@@ -18,10 +18,19 @@ serve(async (req) => {
     return new Response("jig.jpインターンへようこそ！👍");
   }
 
+  if (req.method === "POST" && pathname === "/dreams") {
+    const reqJson = await req.json();
+    const contents = reqJson.contents;
+    if (contents === "") {
+      return new Response("空文字です。");
+    } else {
+      return new Response("空文字ではありません。");
+    }
+  }
   // New endpoint for fetching dreams
   if (req.method === "GET" && pathname === "/dreams") {
     const dreams = await client.query(
-      "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 50"
+      "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 50",
     );
     return new Response(JSON.stringify(dreams));
   }
@@ -35,7 +44,7 @@ serve(async (req) => {
 
     const dreams = await client.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT ? OFFSET ?",
-      [limit, offset]
+      [limit, offset],
     );
     return new Response(JSON.stringify(dreams));
   }

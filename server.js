@@ -10,9 +10,6 @@ const mySqlClient = await new Client().connect({
   db: Deno.env.get("DATABASE"),
 });
 
-/**
- * APIリクエストを処理する
- */
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);

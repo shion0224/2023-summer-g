@@ -27,11 +27,6 @@ window.onload = async () => {
   const contents = document.getElementById("post-contents").value;
   const titles = document.getElementById("post-titles").value;
 
-  //一旦沼るタグの作業はパス！
-  // if(document.getElementById("check_horror").value === horror){
-  //   const horror = 1;
-  // }
-
   try {
     const response = await fetch("/dreams", {
       method: "POST",

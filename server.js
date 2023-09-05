@@ -22,18 +22,18 @@ serve(async (req) => {
   }
 
   if (req.method === "POST" && pathname === "/dreams") {
-    // const title ; // タイトルを取得する
     const reqJson = await req.json();
+    const titles = reqJson.titles;
     const contents = reqJson.contents;
-    if (contents === "") {
+    if (contents === "" && titles === "") {
       return new Response("空文字です。");
     } else {
       // INSERTなど、書込用SQLを実行する
       const insertResult = await mySqlClient.execute(
         `INSERT INTO dreams (title,content) VALUES (?,?);`,
-        ["タイトル", contents]
+
+        [titles, contents]
       );
-      mySqlClient.close()
 
       return new Response("文字です。");
     }

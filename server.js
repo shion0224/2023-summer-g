@@ -36,7 +36,6 @@ serve(async (req) => {
           contents
         ],
       );
-      // mySqlClient.close()
 
         return new Response("文字です。");
     }

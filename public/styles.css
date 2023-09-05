@@ -1,16 +1,29 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
 body {
-	text-align: center;
-	background: skyblue;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+} 
+
+
+/*
+* post.htmlの中身を
+* 中央揃えにしている。(idやクラスを洗い出し、ページごとに共通にしたほうが良い。)
+*/
+#post-title,#post-contents,#post-tag{
+    margin-left: auto;
+    margin-right: auto;
+    width: 8em
 }
 
-/*
-* header
-*/
-
-
-/*
-* footer
-*/
+#input-title,#input-contents{
+	margin-left: auto;
+	margin-right: auto;
+	width: 8em
+}
 
 /*
 * https://kasumiblog.org/checkbox-css/ 
@@ -78,4 +91,73 @@ input[type="checkbox"]::after {
 input[type="checkbox"]:checked::after {
 	opacity: 1;
 	/*チェック後表示*/
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+button {
+	padding: 0;
+	border: none;
+	outline: none;
+	font: inherit;
+	color: inherit;
+	background: none
+}
+
+header {
+	height: 10%;
+	background-color: #0D99FF;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/*
+* header
+*/
+
+header .title {
+	padding: 20px 60px;
+	background-color: #FFCD29;
+	border-radius: 10px;
+}
+
+/*
+* main
+*/
+
+main {
+	height: 80%;
+	width: 100%;
+	background-color: #75D7F0;
+}
+
+main .container{
+
+}
+
+/*
+* footer
+*/
+
+footer {
+	height: 10%;
+	background-color: #0D99FF;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+footer .submit{
+	padding: 20px 60px;
+	background-color: #FFCD29;
+	border-radius: 10px;
 }

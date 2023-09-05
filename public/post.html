@@ -1,54 +1,78 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>投稿画面</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <div class="title">投稿画面</div>
+      <div class="title">投稿画面</div>
     </header>
     <main>
-        <div class="container">
-            <h2 id="title">タイトル</h2>
-            <form >
-                <textarea name="contents" id="post-titles" cols="30" rows="10"></textarea>
-            </form>
+      <div class="container">
+        <h2 id="title">タイトル</h2>
+        <form>
+          <textarea
+            name="contents"
+            id="post-titles"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </form>
 
-            <h2 id="dreams">夢の内容</h2>
-            <form >
-                <textarea name="contents" id="post-contents" cols="30" rows="10"></textarea>
-                <!-- <input type="submit" value="投稿する" > -->
-            </form>
+        <h2 id="dreams">夢の内容</h2>
+        <form>
+          <textarea
+            name="contents"
+            id="post-contents"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <!-- <input type="submit" value="投稿する" > -->
+        </form>
 
-            <h2 id="post-tag">タグ</h2>
-            <input id="check_horror" class="checkbox" type="checkbox" value="horror">
-            <label for="checkbox">ホラー</label>
-            <input id="check_fantasy" class="checkbox" type="checkbox" value="fantasy">
-            <label for="checkbox">ファンタジー</label>
-            <input id="check_love" class="checkbox" type="checkbox" value="love">
-            <label for="checkbox">恋愛</label>
-            <input id="check_human" class="checkbox" type="checkbox" value="human">
-            <label for="checkbox">人間関係</label>
-            <input id="check_comedy" class="checkbox" type="checkbox" value="comedy">
-            <label for="checkbox">コメディー</label>
-        </div>
+        <h2 id="post-tag">タグ</h2>
+        <input
+          id="check_horror"
+          class="checkbox"
+          type="checkbox"
+          value="horror"
+        />
+        <label for="checkbox">ホラー</label>
+        <input
+          id="check_fantasy"
+          class="checkbox"
+          type="checkbox"
+          value="fantasy"
+        />
+        <label for="checkbox">ファンタジー</label>
+        <input id="check_love" class="checkbox" type="checkbox" value="love" />
+        <label for="checkbox">恋愛</label>
+        <input
+          id="check_human"
+          class="checkbox"
+          type="checkbox"
+          value="human"
+        />
+        <label for="checkbox">人間関係</label>
+        <input
+          id="check_comedy"
+          class="checkbox"
+          type="checkbox"
+          value="comedy"
+        />
+        <label for="checkbox">コメディー</label>
+      </div>
     </main>
 
     <footer>
-        <button class="submit" id="cancel-button">キャンセル</button>
-        <button class="submit" id="post-button">投稿する</button>
-
-
+      <button class="submit" id="cancel-button">キャンセル</button>
+      <button class="submit" id="post-button">投稿する</button>
     </footer>
 
     <script type="module" src="./index.js"></script>
-
-</body>
-
+  </body>
 </html>

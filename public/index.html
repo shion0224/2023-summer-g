@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css">
-	<title>Jig.jpインターンへようこそ</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Dream Diary</title>
+  </head>
 
-<body>
-	<!-- サーバーから返ってきた文字を表示する場所 -->
+  <body>
+    <h1>Dream Diary</h1>
+    <p id="welcome-message-container"></p>
+    <!-- Container for the welcome message -->
 
-	<h1 id="test"></h1>
-	<input type="text" id="post-contents" name="name">
-	<button id="post-button">aaa</button>
-	<script type="module" src="./index.js"></script>
+    <textarea id="post-contents" placeholder="Write your dream..."></textarea>
+    <!-- Textarea to write the dream -->
+    <button id="post-button">Post</button>
+    <!-- Button to post the dream -->
+
+    <div id="test"></div>
+    <!-- Container to display the response after posting the dream -->
+
+    <ul id="dreams-list"></ul>
 	<a href="post.html">aaa</a>
-</body>
 
+    <script type="module" src="./index.js"></script>
+  </body>
 </html>

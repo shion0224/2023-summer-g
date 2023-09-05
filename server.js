@@ -2,13 +2,17 @@
 import { serve } from "https://deno.land/std@0.194.0/http/server.ts?s=serve";
 import { serveDir } from "https://deno.land/std@0.194.0/http/file_server.ts?s=serveDir";
 import { Client } from "https://deno.land/x/mysql@v2.11.0/mod.ts";
+import "https://deno.land/std@0.193.0/dotenv/load.ts"
+
 
 const mySqlClient = await new Client().connect({
-  hostname: Deno.env.get("HOST_NAME"),
-  username: Deno.env.get("SQL_USER"),
-  password: Deno.env.get("SQL_PASSWORD"),
+  hostname: Deno.env.get("MYSQL_HOSTNAME"),
+  username: Deno.env.get("MYSQL_USER"),
+  password: Deno.env.get("MYSQL_PASSWORD"),
   db: Deno.env.get("DATABASE"),
 });
+
+// const result = await mySqlClient.query(`SELECT * FROM dreams;`)
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -24,12 +28,22 @@ serve(async (req) => {
     if (contents === "") {
       return new Response("空文字です。");
     } else {
-      return new Response("空文字ではありません。");
+      // INSERTなど、書込用SQLを実行する
+      const insertResult = await mySqlClient.execute(
+        `INSERT INTO dreams (title,content) VALUES (?,?);`,
+        [
+          "khkhkk",
+          "khkhkk"
+        ],
+      );
+      mySqlClient.close()
+
+        return new Response("文字です。");
     }
   }
   // New endpoint for fetching dreams
   if (req.method === "GET" && pathname === "/dreams") {
-    const dreams = await client.query(
+    const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 50",
     );
     return new Response(JSON.stringify(dreams));
@@ -42,7 +56,7 @@ serve(async (req) => {
     const limit = parseInt(params.get("limit") || "10");
     const offset = (page - 1) * limit;
 
-    const dreams = await client.query(
+    const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT ? OFFSET ?",
       [limit, offset],
     );

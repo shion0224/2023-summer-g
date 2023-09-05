@@ -23,6 +23,7 @@ serve(async (req) => {
   }
 
   if (req.method === "POST" && pathname === "/dreams") {
+    // const title ; // タイトルを取得する
     const reqJson = await req.json();
     const contents = reqJson.contents;
     if (contents === "") {
@@ -32,8 +33,8 @@ serve(async (req) => {
       const insertResult = await mySqlClient.execute(
         `INSERT INTO dreams (title,content) VALUES (?,?);`,
         [
-          "khkhkk",
-          "khkhkk"
+          "タイトル",
+          contents
         ],
       );
       mySqlClient.close()

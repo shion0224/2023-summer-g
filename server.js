@@ -11,15 +11,21 @@ const mySqlClient = await new Client().connect({
   db: Deno.env.get("DATABASE"),
 });
 
-// const result = await mySqlClient.query(`SELECT * FROM dreams;`)
-
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
 
+  /*
+   * いらないやつ
+  */
+
   if (req.method === "GET" && pathname === "/welcome-message") {
     return new Response("jig.jpインターンへようこそ！👍");
   }
+
+  /*
+   * 夢の内容をPOSTする。
+  */
 
   if (req.method === "POST" && pathname === "/dreams") {
     const reqJson = await req.json();
@@ -40,13 +46,22 @@ serve(async (req) => {
         return new Response("文字です。");
     }
   }
-  // New endpoint for fetching dreams
+
+
+  /*
+   * 投稿を時間順にGETする。
+  */
   if (req.method === "GET" && pathname === "/dreams") {
     const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 50"
     );
     return new Response(JSON.stringify(dreams));
   }
+
+
+  /*
+   * 
+  */
 
   if (req.method === "GET" && pathname.startsWith("/dreams/paginated")) {
     const params = new URLSearchParams(new URL(req.url).search);

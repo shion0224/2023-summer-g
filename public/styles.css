@@ -2,24 +2,28 @@
 	box-sizing: border-box;
 	margin: 0;
 }
+
 body {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
-} 
+}
 
 
 /*
 * post.htmlの中身を
 * 中央揃えにしている。(idやクラスを洗い出し、ページごとに共通にしたほうが良い。)
 */
-#post-title,#post-contents,#post-tag{
-    margin-left: auto;
-    margin-right: auto;
-    width: 8em
+#post-title,
+#post-dreams,
+#post-tag {
+	margin-left: auto;
+	margin-right: auto;
+	width: 8em
 }
 
-#input-title,#input-contents{
+#input-title,
+#input-contents {
 	margin-left: auto;
 	margin-right: auto;
 	width: 8em
@@ -91,15 +95,6 @@ input[type="checkbox"]::after {
 input[type="checkbox"]:checked::after {
 	opacity: 1;
 	/*チェック後表示*/
-    margin: 0;
-    padding: 0;
-    background: none;
-    border: none;
-    border-radius: 0;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 }
 
 button {
@@ -140,9 +135,7 @@ main {
 	background-color: #75D7F0;
 }
 
-main .container{
-
-}
+main .container {}
 
 /*
 * footer
@@ -156,7 +149,8 @@ footer {
 	align-items: center;
 	justify-content: center;
 }
-footer .submit{
+
+footer .submit {
 	padding: 20px 60px;
 	background-color: #FFCD29;
 	border-radius: 10px;

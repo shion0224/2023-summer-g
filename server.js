@@ -2,11 +2,11 @@
 import { serve } from "https://deno.land/std@0.194.0/http/server.ts?s=serve";
 import { serveDir } from "https://deno.land/std@0.194.0/http/file_server.ts?s=serveDir";
 import { Client } from "https://deno.land/x/mysql@v2.11.0/mod.ts";
-
+import "https://deno.land/std@0.193.0/dotenv/load.ts";
 const mySqlClient = await new Client().connect({
-  hostname: Deno.env.get("HOST_NAME"),
-  username: Deno.env.get("SQL_USER"),
-  password: Deno.env.get("SQL_PASSWORD"),
+  hostname: Deno.env.get("MYSQL_HOSTNAME"),
+  username: Deno.env.get("MYSQL_USER"),
+  password: Deno.env.get("MYSQL_PASSWORD"),
   db: Deno.env.get("DATABASE"),
 });
 
@@ -29,24 +29,28 @@ serve(async (req) => {
   }
   // New endpoint for fetching dreams
   if (req.method === "GET" && pathname === "/dreams") {
-    const dreams = await client.query(
+    const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 50"
     );
     return new Response(JSON.stringify(dreams));
   }
 
-  // New endpoint for paginated dreams
   if (req.method === "GET" && pathname.startsWith("/dreams/paginated")) {
     const params = new URLSearchParams(new URL(req.url).search);
     const page = parseInt(params.get("page") || "1");
     const limit = parseInt(params.get("limit") || "10");
     const offset = (page - 1) * limit;
 
-    const dreams = await client.query(
+    const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT ? OFFSET ?",
-      [limit, offset],
+      [limit, offset]
     );
-    return new Response(JSON.stringify(dreams));
+
+    const filteredDreams = dreams.map((dream) => ({
+      dream_content: dream.dream_content,
+      timestamp: dream.timestamp,
+    }));
+    return new Response(JSON.stringify(filteredDreams));
   }
 
   return serveDir(req, {

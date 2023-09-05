@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Dream Diary</title>
-  </head>
 
-  <body>
-    <h1>Dream Diary</h1>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<title>Dream Diary</title>
+</head>
+
+<body>
+	<header>
+		<div class="title">投稿一覧</div>
+	</header>
+	<main>
+		<div>
+			<p>投稿</p>
+			<div class=comment></div>
+		</div>
+		<div>
+			<p>投稿</p>
+			<div class=comment></div>
+		</div>
+		<div>
+			<p>投稿</p>
+			<div class=comment></div>
+		</div>
+		<div>
+			<p>投稿</p>
+			<div class=comment></div>
+		</div>
+		<h1>Dream Diary</h1>
     <p id="welcome-message-container"></p>
     <!-- Container for the welcome message -->
 
@@ -23,6 +44,20 @@
     <ul id="dreams-list"></ul>
 	<a href="post.html">aaa</a>
 
-    <script type="module" src="./index.js"></script>
-  </body>
+	</main>
+	<footer>
+		<button class="submit">
+		投稿する
+		</button>
+	</footer>
+	<!-- サーバーから返ってきた文字を表示する場所 -->
+
+	<!-- <h1 id="test"></h1> -->
+	<!-- <input type="text" id="post-contents" name="name"> -->
+	<!-- <button id="post-button">aaa</button> -->
+
+
+	<script type="module" src="./index.js"></script>
+</body>
+
 </html>

@@ -21,6 +21,22 @@ serve(async (req) => {
     return new Response("jig.jpインターンへようこそ！👍");
   }
 
+  if (req.method === "GET" && pathname === "/dream-title") {
+    const dreams = await mySqlClient.query(
+      "SELECT title FROM dreams WHERE dream_id = 58",
+    );
+    const title = dreams[0].title;
+    return new Response(title);
+  }
+
+  if (req.method === "GET" && pathname === "/dream-content") {
+    const dreams = await mySqlClient.query(
+      "SELECT content FROM dreams WHERE dream_id = 58",
+    );
+    const content = dreams[0].content;
+    return new Response(content);
+  }
+
   if (req.method === "POST" && pathname === "/dreams") {
     const reqJson = await req.json();
     const titles = reqJson.titles;

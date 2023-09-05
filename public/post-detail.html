@@ -14,16 +14,17 @@
 	</header>
 	<main>
         <h2>タイトル</h2>
-        <h3>タイトル名</h3>
+        <h3 id="dream-title">タイトル名</h3>
 
-        <h2>タグ</h2>
+        <!-- タグのデータのDB保存が終わり次第手をつける。 -->
+        <h2>タグ</h2> 
         <h3>#ホラー #恋愛 #コメディー</h3>
 
         <h2>内容</h2>
-        <h3>hogehoge</h3>
+        <h3 id="dream-content">hogehoge</h3>
 
         <h2>コメント</h2>
-        <h3>hogehoge</h3>
+        <h3>まだコメントはありません。</h3>
 
         <h2 id="dreams">夢の内容</h2>
         <form >
@@ -32,9 +33,8 @@
         </form>
 	</main>
 	<footer>
-		<button class="submit">
-		投稿する
-		</button>
+		<button class="submit" onclick="location.href='index.html'">投稿一覧</button>
+        <button class="submit" onclick="location.href='post.html'">新規投稿</button>
 	</footer>
 
 

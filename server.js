@@ -31,14 +31,11 @@ serve(async (req) => {
       // INSERTなど、書込用SQLを実行する
       const insertResult = await mySqlClient.execute(
         `INSERT INTO dreams (title,content) VALUES (?,?);`,
-        [
-          "タイトル",
-          contents
-        ],
+        ["タイトル", contents]
       );
       mySqlClient.close()
 
-        return new Response("文字です。");
+      return new Response("文字です。");
     }
   }
   // New endpoint for fetching dreams

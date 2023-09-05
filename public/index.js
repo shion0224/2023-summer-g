@@ -30,3 +30,14 @@ document.getElementById("post-button").onclick = async () => {
     console.error("Error posting dream:", error);
   }
 };
+document.getElementById("fetch-dreams-button").onclick = async () => {
+  try {
+    const response = await fetch("/dreams");
+    const dreams = await response.json();
+    console.log(dreams);
+    const userIds = dreams.map((dream) => dream.title);
+    document.getElementById("dreams-container").innerText = userIds.join(", ");
+  } catch (error) {
+    console.error("Error fetching dreams:", error);
+  }
+};

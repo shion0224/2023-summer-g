@@ -30,7 +30,7 @@ serve(async (req) => {
   // New endpoint for fetching dreams
   if (req.method === "GET" && pathname === "/dreams") {
     const dreams = await client.query(
-      "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 50",
+      "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 50"
     );
     return new Response(JSON.stringify(dreams));
   }

@@ -9,6 +9,21 @@ body {
 	flex-direction: column;
 } 
 
+/*
+* https://kasumiblog.org/checkbox-css/ 
+* コピペした内容。webkitなどはあまり使わないほうが良かった気がする。
+*/
+input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
 button {
 	padding: 0;
 	border: none;

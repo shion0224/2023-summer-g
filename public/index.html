@@ -36,25 +36,33 @@
       <button id="post-button">Post</button>
       <!-- Button to post the dream -->
 
-      <div id="test"></div>
-      <!-- Container to display the response after posting the dream -->
+<body>
+	<header>
+		<div class="title">投稿一覧</div>
+	</header>
 
-      <ul id="dreams-list"></ul>
-      <a href="post.html">aaa</a>
-      <button id="fetch-dreams-button">Fetch Dreams</button>
-      <div id="dreams-container"></div>
-    </main>
-    <footer>
-      <button class="submit">投稿する</button>
-    </footer>
-    <!-- サーバーから返ってきた文字を表示する場所 -->
+	<main>
+		<div id="get-contents">
+			<div id="dreams">
+				<h3 id="dream-title">タイトル名</h3>
+				<div id="dream-content">内容</div>
+			</div>
+		</div>
+		<h1>Dream Diary</h1>
+		<textarea id="post-titles" placeholder="タイトル"></textarea>
+		<textarea id="post-contents" placeholder="Write your dream..."></textarea>
+		<button type="button" id="post-button">Post</button>
+		<div id="test"></div>
+		<ul id="dreams-list"></ul>
+		<a href="post.html">aaa</a>
 
-    <!-- <h1 id="test"></h1> -->
-    <!-- <input type="text" id="post-contents" name="name"> -->
-    <!-- <button id="post-button">aaa</button> -->
-    <div class="comment-section">
-      <a href="comment.html">comment</a>
-    </div>
-    <script type="module" src="./index.js"></script>
-  </body>
+	</main>
+
+	<footer>
+		<button class="submit">投稿する</button>
+	</footer>
+
+	<script type="module" src="./index.js"></script>
+</body>
+
 </html>

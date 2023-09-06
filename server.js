@@ -15,12 +15,20 @@ serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
 
-  /*
-   * いらないやつ
-  */
+  if (req.method === "GET" && pathname === "/dream-title") {
+    const dreams = await mySqlClient.query(
+      "SELECT title FROM dreams WHERE dream_id = 58",
+    );
+    const title = dreams[0].title;
+    return new Response(title);
+  }
 
-  if (req.method === "GET" && pathname === "/welcome-message") {
-    return new Response("jig.jpインターンへようこそ！👍");
+  if (req.method === "GET" && pathname === "/dream-content") {
+    const dreams = await mySqlClient.query(
+      "SELECT content FROM dreams WHERE dream_id = 58",
+    );
+    const content = dreams[0].content;
+    return new Response(content);
   }
 
   /*
@@ -29,6 +37,7 @@ serve(async (req) => {
 
   if (req.method === "POST" && pathname === "/dreams") {
     const reqJson = await req.json();
+    console.log(reqJson);
     const titles = reqJson.titles;
     const contents = reqJson.contents;
     if (contents === "" && titles === "") {
@@ -44,16 +53,16 @@ serve(async (req) => {
       return new Response("文字です。");
     }
   }
-
-
-  /*
-   * 投稿を時間順にGETする。
-  */
+  // New endpoint for fetching dreams
+  /**
+   * 投稿をGETする。
+   */
   if (req.method === "GET" && pathname === "/dreams") {
     const dreams = await mySqlClient.query(
-      "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 50"
+      "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 5"
     );
-    return new Response(JSON.stringify(dreams));
+    const titles = dreams.map(dreams => dreams.title);
+    return new Response(titles);
   }
 
 

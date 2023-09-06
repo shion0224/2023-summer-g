@@ -13,7 +13,7 @@ window.onload = async () => {
       const data = JSON.parse(result);
 
       const parentDiv = document.getElementById("get-contents");
-      for (let i = 1; i <= data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         // dreams1, dreams2, ... のようなdiv要素を作成
         const dreamDiv = document.createElement("div");
         dreamDiv.setAttribute("class", `dreams`);
@@ -31,7 +31,8 @@ window.onload = async () => {
         dreamContentDiv.textContent = data[i].content; // 夢の内容を挿入
         dreamDiv.appendChild(dreamContentDiv);
         dreamDiv.onclick = async () => {
-          localStorage.setItem("dream_id", 51);
+          localStorage.setItem("dream_id", data[i].dream_id);
+          console.log(data[i].dream_id);
           window.location.href = `./post-detail.html`;
         };
       }

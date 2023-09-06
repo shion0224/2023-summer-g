@@ -5,36 +5,37 @@ window.onload = async () => {
     try {
       const response = await fetch(`/dreams/${dreamId}`);
       const dream = await response.json();
-      document.getElementById("dream-title-display").innerText = dream.title;
-      localStorage.setItem("dream_id", dream.id);
+      document.getElementById("dream-title").innerText = dream[0].title;
+      document.getElementById("dream-content").innerText = dream[0].content;
     } catch (error) {
       console.error("Error fetching the associated dream:", error);
     }
   }
 };
-document.getElementById("post-comment-button").onclick = async () => {
-  const commentContents = document.getElementById("comment-contents").value;
+// document.getElementById("post-comment-button").onclick = async () => {
 
-  if (!commentContents.trim()) {
-    alert("Comment cannot be empty.");
-    return;
-  }
+//   const commentContents = document.getElementById("comment-contents").value;
 
-  const dreamId = localStorage.getItem("dream_id");
-  if (!dreamId) {
-    alert("No associated dream selected.");
-    return;
-  }
+//   if (!commentContents.trim()) {
+//     alert("Comment cannot be empty.");
+//     return;
+//   }
 
-  try {
-    const response = await fetch(`/dreams/${dreamId}/comments`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ comment: commentContents }),
-    });
-    const result = await response.text();
-    alert(result);
-  } catch (error) {
-    console.error("Error posting comment:", error);
-  }
-};
+//   const dreamId = localStorage.getItem("dream_id");
+//   if (!dreamId) {
+//     alert("No associated dream selected.");
+//     return;
+//   }
+
+//   try {
+//     const response = await fetch(`/dreams/${dreamId}/comments`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ comment: commentContents }),
+//     });
+//     const result = await response.text();
+//     alert(result);
+//   } catch (error) {
+//     console.error("Error posting comment:", error);
+//   }
+// };

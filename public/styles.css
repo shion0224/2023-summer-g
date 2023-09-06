@@ -16,8 +16,16 @@ body {
 */
 
 div#dreams{
-	background-color: #FFCD29;
-	margin-bottom: 10px;
+	color: #fff;
+	background-color: #0D99FF;
+	width: 358px;
+    height: 70px;
+    border-radius: 100vh;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	/* color: #FFCD29; */
 }
 
@@ -145,14 +153,20 @@ header .title {
 */
 
 main {
+	flex: 1;
 	padding: 0 16px;
 	margin-top: 84.4px;
 	height: 80%;
 	width: 100%;
+	overflow-y: auto;
 	background-color: #75D7F0;
 }
 
-main .container {}
+
+main .space {
+	margin-top: 3px;
+	height: 85px;
+}
 
 /*
 * footer

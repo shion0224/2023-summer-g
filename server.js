@@ -11,8 +11,6 @@ const mySqlClient = await new Client().connect({
   db: Deno.env.get("DATABASE"),
 });
 
-// const result = await mySqlClient.query(`SELECT * FROM dreams;`)
-
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
@@ -32,6 +30,10 @@ serve(async (req) => {
     const content = dreams[0].content;
     return new Response(content);
   }
+
+  /*
+   * 夢の内容をPOSTする。
+  */
 
   if (req.method === "POST" && pathname === "/dreams") {
     const reqJson = await req.json();
@@ -64,6 +66,11 @@ serve(async (req) => {
     const titles = dreams.map(dreams => dreams.title);
     return new Response(titles);
   }
+
+
+  /*
+   * 
+  */
 
   if (req.method === "GET" && pathname.startsWith("/dreams/paginated")) {
     const params = new URLSearchParams(new URL(req.url).search);

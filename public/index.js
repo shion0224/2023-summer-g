@@ -5,26 +5,33 @@ window.onload = async () => {
   if (window.location.pathname === "/" ||window.location.pathname === "/index.html") {
     try {
       const response = await fetch("/dreams");
+      const title = await response.text();
+      const title_arr = title.split(',');
+      // const content_arr;
+      console.log(arr);
 
       const parentDiv = document.getElementById("get-contents");
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 0; i < 5; i++) {
+
         // dreams1, dreams2, ... のようなdiv要素を作成
         const dreamDiv = document.createElement("div");
-        dreamDiv.setAttribute("id", `dreams`);
+        dreamDiv.setAttribute("class", `dreams`);
         parentDiv.appendChild(dreamDiv);
 
         // dream-title1, dream-title2, ... のようなdiv要素をdreamDivの子要素として作成
         const dreamTitleDiv = document.createElement("div");
         dreamTitleDiv.setAttribute("id", `dream-title${i}`);
-        dreamTitleDiv.textContent = `This is dream title ${i}`; // サンプルテキスト
+        dreamTitleDiv.textContent = title_arr[i]; // タイトル名を挿入
         dreamDiv.appendChild(dreamTitleDiv);
 
         // dream-content1, dream-content2, ... のようなdiv要素をdreamDivの子要素として作成
         const dreamContentDiv = document.createElement("div");
         dreamContentDiv.setAttribute("id", `dream-content${i}`);
-        dreamContentDiv.textContent = `This is dream content ${i}`; // サンプルテキスト
+        dreamContentDiv.textContent = content_arr[i]; // 夢の内容を挿入
         dreamDiv.appendChild(dreamContentDiv);
       }
+
+
     } catch (error) {
       console.error("Error fetching from /post:", error);
     }

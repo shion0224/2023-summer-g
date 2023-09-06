@@ -46,7 +46,6 @@ serve(async (req) => {
       // INSERTなど、書込用SQLを実行する
       const insertResult = await mySqlClient.execute(
         `INSERT INTO dreams (title,content) VALUES (?,?);`,
-
         [titles, contents]
       );
 
@@ -57,11 +56,13 @@ serve(async (req) => {
   /**
    * 投稿をGETする。
    */
+
   if (req.method === "GET" && pathname === "/dreams") {
     const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 5"
     );
     const titles = dreams.map((dreams) => dreams.title);
+    console.log(titles);
     return new Response(titles);
   }
 

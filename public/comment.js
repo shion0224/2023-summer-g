@@ -1,6 +1,20 @@
 window.onload = async () => {
   const dreamId = localStorage.getItem("dream_id");
+  try {
+    const response = await fetch(`/dreams/${dreamId}/comments`);
+    const comments = await response.json();
 
+    const commentsListDiv = document.getElementById("comments-list");
+
+    comments.forEach((comment) => {
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comment");
+      commentDiv.innerText = comment.content;
+      commentsListDiv.appendChild(commentDiv);
+    });
+  } catch (error) {
+    console.error("Error fetching the comments:", error);
+  }
   if (dreamId) {
     try {
       const response = await fetch(`/dreams/${dreamId}`);

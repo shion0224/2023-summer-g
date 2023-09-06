@@ -7,7 +7,7 @@ window.onload = async () => {
       const response = await fetch("/dreams");
 
       const parentDiv = document.getElementById("get-contents");
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 30; i++) {
         // dreams1, dreams2, ... のようなdiv要素を作成
         const dreamDiv = document.createElement("div");
         dreamDiv.setAttribute("id", `dreams`);

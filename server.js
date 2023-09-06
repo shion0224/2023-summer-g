@@ -54,11 +54,15 @@ serve(async (req) => {
     }
   }
   // New endpoint for fetching dreams
+  /**
+   * 投稿をGETする。
+   */
   if (req.method === "GET" && pathname === "/dreams") {
     const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 5"
     );
-    return new Response(JSON.stringify(dreams));
+    const titles = dreams.map(dreams => dreams.title);
+    return new Response(titles);
   }
 
   if (req.method === "GET" && pathname.startsWith("/dreams/paginated")) {

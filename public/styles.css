@@ -1,7 +1,7 @@
 * {
 	box-sizing: border-box;
 	margin: 0;
-	background-color: #75D7F0;
+	/* background-color: #75D7F0; */
 }
 
 body {
@@ -9,6 +9,16 @@ body {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+}
+
+/*
+* 投稿一覧での投稿の表示
+*/
+
+div#dreams{
+	background-color: #FFCD29;
+	margin-bottom: 10px;
+	/* color: #FFCD29; */
 }
 
 

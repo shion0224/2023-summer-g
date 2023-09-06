@@ -2,10 +2,15 @@ window.onload = async () => {
   /**
    * /index.htmlでの処理
    */
-  if (window.location.pathname === "/" ||window.location.pathname === "/index.html") {
+  if (
+    window.location.pathname === "/" ||
+    window.location.pathname === "/index.html"
+  ) {
     try {
       const response = await fetch("/dreams");
-
+      const titles = await response.text();
+      const titlearray = titles.split(",");
+      console.log(titlearray);
       const parentDiv = document.getElementById("get-contents");
       for (let i = 1; i <= 5; i++) {
         // dreams1, dreams2, ... のようなdiv要素を作成
@@ -24,6 +29,10 @@ window.onload = async () => {
         dreamContentDiv.setAttribute("id", `dream-content${i}`);
         dreamContentDiv.textContent = `This is dream content ${i}`; // サンプルテキスト
         dreamDiv.appendChild(dreamContentDiv);
+        dreamDiv.onclick = async () => {
+          localStorage.setItem("dream_id", 51);
+          window.location.href = `./post-detail.html`;
+        };
       }
     } catch (error) {
       console.error("Error fetching from /post:", error);
@@ -40,8 +49,8 @@ window.onload = async () => {
 
     try {
       const response = await fetch("/dream-content");
-      document.getElementById("dream-content").innerText = await response
-        .text();
+      document.getElementById("dream-content").innerText =
+        await response.text();
     } catch (error) {
       console.error("Error fetching from /dream-title:", error);
     }

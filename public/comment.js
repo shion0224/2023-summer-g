@@ -1,6 +1,6 @@
 window.onload = async () => {
-  // const dreamId = localStorage.getItem("dream_id");
-  const dreamId = 60;
+  const dreamId = localStorage.getItem("dream_id");
+
   if (dreamId) {
     try {
       const response = await fetch(`/dreams/${dreamId}`);
@@ -20,8 +20,7 @@ document.getElementById("post-comment-button").onclick = async () => {
     return;
   }
 
-  //   const dreamId = localStorage.getItem("dream_id");
-  const dreamId = 60;
+  const dreamId = localStorage.getItem("dream_id");
   if (!dreamId) {
     alert("No associated dream selected.");
     return;

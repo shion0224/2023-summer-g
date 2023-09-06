@@ -7,10 +7,9 @@ window.onload = async () => {
       const response = await fetch("/dreams");
       const result = await response.text();
       const data = JSON.parse(result);
-      console.log(JSON.parse(result));
 
       const parentDiv = document.getElementById("get-contents");
-      for (let i = 1; i <= 30; i++) {
+      for (let i = 1; i <= data.length; i++) {
         // dreams1, dreams2, ... のようなdiv要素を作成
         const dreamDiv = document.createElement("div");
         dreamDiv.setAttribute("class", `dreams`);

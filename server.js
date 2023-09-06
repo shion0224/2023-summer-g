@@ -67,8 +67,6 @@ serve(async (req) => {
       content: dream.content
     }));
 
-    console.log(result);
-
     // JSON形式でResponseを返す
     return new Response(JSON.stringify(result), {
       headers: { "Content-Type": "application/json" },

@@ -17,7 +17,7 @@ serve(async (req) => {
 
   if (req.method === "GET" && pathname === "/dream-title") {
     const dreams = await mySqlClient.query(
-      "SELECT title FROM dreams WHERE dream_id = 58",
+      "SELECT title FROM dreams WHERE dream_id = 58"
     );
     const title = dreams[0].title;
     return new Response(title);
@@ -25,7 +25,7 @@ serve(async (req) => {
 
   if (req.method === "GET" && pathname === "/dream-content") {
     const dreams = await mySqlClient.query(
-      "SELECT content FROM dreams WHERE dream_id = 58",
+      "SELECT content FROM dreams WHERE dream_id = 58"
     );
     const content = dreams[0].content;
     return new Response(content);
@@ -33,7 +33,7 @@ serve(async (req) => {
 
   /*
    * 夢の内容をPOSTする。
-  */
+   */
 
   if (req.method === "POST" && pathname === "/dreams") {
     const reqJson = await req.json();
@@ -61,14 +61,13 @@ serve(async (req) => {
     const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 5"
     );
-    const titles = dreams.map(dreams => dreams.title);
+    const titles = dreams.map((dreams) => dreams.title);
     return new Response(titles);
   }
 
-
   /*
-   * 
-  */
+   *
+   */
 
   if (req.method === "GET" && pathname.startsWith("/dreams/paginated")) {
     const params = new URLSearchParams(new URL(req.url).search);

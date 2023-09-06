@@ -5,13 +5,12 @@ window.onload = async () => {
   if (window.location.pathname === "/" ||window.location.pathname === "/index.html") {
     try {
       const response = await fetch("/dreams");
-      const title = await response.text();
-      const title_arr = title.split(',');
-      // const content_arr;
-      console.log(arr);
+      const result = await response.text();
+      const data = JSON.parse(result);
+      console.log(JSON.parse(result));
 
       const parentDiv = document.getElementById("get-contents");
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 20; i++) {
 
         // dreams1, dreams2, ... のようなdiv要素を作成
         const dreamDiv = document.createElement("div");
@@ -21,13 +20,13 @@ window.onload = async () => {
         // dream-title1, dream-title2, ... のようなdiv要素をdreamDivの子要素として作成
         const dreamTitleDiv = document.createElement("div");
         dreamTitleDiv.setAttribute("id", `dream-title${i}`);
-        dreamTitleDiv.textContent = title_arr[i]; // タイトル名を挿入
+        dreamTitleDiv.textContent = data[i].title; // タイトル名を挿入
         dreamDiv.appendChild(dreamTitleDiv);
 
         // dream-content1, dream-content2, ... のようなdiv要素をdreamDivの子要素として作成
         const dreamContentDiv = document.createElement("div");
         dreamContentDiv.setAttribute("id", `dream-content${i}`);
-        dreamContentDiv.textContent = content_arr[i]; // 夢の内容を挿入
+        dreamContentDiv.textContent = data[i].content; // 夢の内容を挿入
         dreamDiv.appendChild(dreamContentDiv);
       }
 

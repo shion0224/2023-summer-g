@@ -17,7 +17,7 @@ serve(async (req) => {
 
   if (req.method === "GET" && pathname === "/dream-title") {
     const dreams = await mySqlClient.query(
-      "SELECT title FROM dreams WHERE dream_id = 58"
+      "SELECT title FROM dreams WHERE dream_id = 58",
     );
     const title = dreams[0].title;
     return new Response(title);
@@ -25,7 +25,7 @@ serve(async (req) => {
 
   if (req.method === "GET" && pathname === "/dream-content") {
     const dreams = await mySqlClient.query(
-      "SELECT content FROM dreams WHERE dream_id = 58"
+      "SELECT content FROM dreams WHERE dream_id = 58",
     );
     const content = dreams[0].content;
     return new Response(content);
@@ -46,7 +46,7 @@ serve(async (req) => {
       // INSERTなど、書込用SQLを実行する
       const insertResult = await mySqlClient.execute(
         `INSERT INTO dreams (title,content) VALUES (?,?);`,
-        [titles, contents]
+        [titles, contents],
       );
 
       return new Response("文字です。");
@@ -59,16 +59,23 @@ serve(async (req) => {
 
   if (req.method === "GET" && pathname === "/dreams") {
     const dreams = await mySqlClient.query(
-      "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 5"
+      "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT 20",
     );
-    const titles = dreams.map((dreams) => dreams.title);
-    console.log(titles);
-    return new Response(titles);
+    // titleとcontentの両方を含むオブジェクトの配列を作成
+    const result = dreams.map((dream) => ({
+      title: dream.title,
+      content: dream.content
+    }));
+
+    console.log(result);
+
+    // JSON形式でResponseを返す
+    return new Response(JSON.stringify(result), {
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  /*
-   *
-   */
+  /* */
 
   if (req.method === "GET" && pathname.startsWith("/dreams/paginated")) {
     const params = new URLSearchParams(new URL(req.url).search);
@@ -78,7 +85,7 @@ serve(async (req) => {
 
     const dreams = await mySqlClient.query(
       "SELECT * FROM dreams ORDER BY timestamp DESC LIMIT ? OFFSET ?",
-      [limit, offset]
+      [limit, offset],
     );
 
     const filteredDreams = dreams.map((dream) => ({
@@ -101,7 +108,7 @@ serve(async (req) => {
     } else {
       const insertResult = await mySqlClient.execute(
         `INSERT INTO comments (dream_id, content) VALUES (?, ?);`,
-        [dreamId, commentContent]
+        [dreamId, commentContent],
       );
       return new Response("Comment added successfully.");
     }
@@ -113,7 +120,7 @@ serve(async (req) => {
 
     const comments = await mySqlClient.query(
       "SELECT * FROM dreams WHERE dream_id = ? ORDER BY timestamp DESC LIMIT 50",
-      [dreamId]
+      [dreamId],
     );
     return new Response(JSON.stringify(comments));
   }

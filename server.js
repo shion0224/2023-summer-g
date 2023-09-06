@@ -37,13 +37,11 @@ serve(async (req) => {
       // INSERTなど、書込用SQLを実行する
       const insertResult = await mySqlClient.execute(
         `INSERT INTO dreams (title,content) VALUES (?,?);`,
-        [
-          titles,
-          contents
-        ],
+
+        [titles, contents]
       );
 
-        return new Response("文字です。");
+      return new Response("文字です。");
     }
   }
 
@@ -80,6 +78,37 @@ serve(async (req) => {
     }));
     return new Response(JSON.stringify(filteredDreams));
   }
+  if (
+    req.method === "POST" &&
+    pathname.startsWith("/dreams/") &&
+    pathname.endsWith("/comments")
+  ) {
+    const dreamId = parseInt(pathname.split("/")[2]); // Assuming "/dreams/{dreamId}/comments" format
+    const reqJson = await req.json();
+    const commentContent = reqJson.comment;
+
+    if (commentContent === "") {
+      return new Response("Comment cannot be empty.");
+    } else {
+      const insertResult = await mySqlClient.execute(
+        `INSERT INTO comments (dream_id, content) VALUES (?, ?);`,
+        [dreamId, commentContent]
+      );
+      return new Response("Comment added successfully.");
+    }
+  }
+
+  // Endpoint to retrieve comments for a specific dream
+  if (req.method === "GET" && pathname.startsWith("/dreams/")) {
+    const dreamId = parseInt(pathname.split("/")[2]); // Assuming "/dreams/{dreamId}/comments" format
+
+    const comments = await mySqlClient.query(
+      "SELECT * FROM dreams WHERE dream_id = ? ORDER BY timestamp DESC LIMIT 50",
+      [dreamId]
+    );
+    return new Response(JSON.stringify(comments));
+  }
+  console.log("Attaching event to post-comment-button");
 
   return serveDir(req, {
     fsRoot: "public",

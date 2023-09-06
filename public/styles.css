@@ -16,8 +16,16 @@ body {
 */
 
 div#dreams{
-	background-color: #FFCD29;
-	margin-bottom: 10px;
+	color: #fff;
+	background-color: #0D99FF;
+	width: 358px;
+    height: 70px;
+    border-radius: 100vh;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	/* color: #FFCD29; */
 }
 
@@ -154,12 +162,10 @@ main {
 	background-color: #75D7F0;
 }
 
-main .dreams{
-	background-color: #0D99FF;
-}
 
 main .space {
-height: 85px;
+	margin-top: 3px;
+	height: 85px;
 }
 
 /*

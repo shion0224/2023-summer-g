@@ -1,7 +1,8 @@
 document.getElementById("post-button").onclick = async () => {
   try {
     const response = await fetch("/dreams");
-    document.getElementById("post-button").innerText = await response.text();
+    //これがあると投稿を押したときに気持ち悪くなる。
+    // document.getElementById("post-button").innerText = await response.text();
   } catch (error) {
     console.error("Error fetching from /post:", error);
   }

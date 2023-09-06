@@ -12,30 +12,29 @@ window.onload = async () => {
     }
   }
 };
-// document.getElementById("post-comment-button").onclick = async () => {
+document.getElementById("post-comment-button").onclick = async () => {
+  const commentContents = document.getElementById("post-contents").value;
 
-//   const commentContents = document.getElementById("comment-contents").value;
+  if (!commentContents.trim()) {
+    alert("Comment cannot be empty.");
+    return;
+  }
 
-//   if (!commentContents.trim()) {
-//     alert("Comment cannot be empty.");
-//     return;
-//   }
+  const dreamId = localStorage.getItem("dream_id");
+  if (!dreamId) {
+    alert("No associated dream selected.");
+    return;
+  }
 
-//   const dreamId = localStorage.getItem("dream_id");
-//   if (!dreamId) {
-//     alert("No associated dream selected.");
-//     return;
-//   }
-
-//   try {
-//     const response = await fetch(`/dreams/${dreamId}/comments`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ comment: commentContents }),
-//     });
-//     const result = await response.text();
-//     alert(result);
-//   } catch (error) {
-//     console.error("Error posting comment:", error);
-//   }
-// };
+  try {
+    const response = await fetch(`/dreams/${dreamId}/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ comment: commentContents }),
+    });
+    const result = await response.text();
+    alert(result);
+  } catch (error) {
+    console.error("Error posting comment:", error);
+  }
+};

@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="ja">
+  <body>
+    <header>
+      <div id="user-circle" class="user-circle">UserName</div>
+      <div class="title">投稿一覧</div>
+      <button id="logout-button" style="position: absolute; top: 0; right: 0">
+        Logout
+      </button>
+    </header>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="styles.css" />
-	<title>Dream Diary</title>
-</head>
+    <main>
+      <div id="get-contents">
+        <!-- ここにdreamsが入ります -->
+      </div>
+      <div class="space"></div>
+    </main>
 
-<body>
-	<header>
-		<div class="title">投稿一覧</div>
-		<button id="logout-button" style="position: absolute; top: 0; right: 0">
-			Logout
-		</button>
-	</header>
-	<main>
-		<div id="get-contents">
-			<!-- ここにdreamsが入ります -->
-		</div>
-		<div class="space"></div>
-	</main>
+    <footer>
+      <button onclick="location.href='post.html'" class="submit">
+        投稿する
+      </button>
+    </footer>
+    <script>
+      // When the document is fully loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        // Get the logout button by its ID
+        const logoutButton = document.getElementById("logout-button");
+        const userName = localStorage.getItem("name");
+        if (userName) {
+          document.getElementById("user-circle").innerText = userName;
+        }
 
-	<footer>
-		<button onclick="location.href='post.html'" class="submit">
-			投稿する
-		</button>
-	</footer>
-	<script>
-		// When the document is fully loaded
-		document.addEventListener("DOMContentLoaded", () => {
-			// Get the logout button by its ID
-			const logoutButton = document.getElementById("logout-button");
+        // Add a click event listener
+        logoutButton.addEventListener("click", () => {
+          // Call the logout API (I'm assuming you'll set up a logout endpoint in your server)
+          fetch("/users/logout", { method: "POST" })
+            .then((response) => response.json())
+            .then((data) => {
+              // If logout is successful, redirect to login.html
+              if (data.success) {
+                window.location.href = "login.html";
+                localStorage.removeItem("password");
+                localStorage.removeItem("did");
+                localStorage.removeItem("key");
+                localStorage.removeItem("name");
+              } else {
+                console.error("Error logging out:", data.error);
+              }
+            });
+        });
+      });
+    </script>
+    <script type="module" src="./index.js"></script>
+    <!-- index.html -->
+    <!-- <script type="module">
 
-			// Add a click event listener
-			logoutButton.addEventListener("click", () => {
-				// Call the logout API (I'm assuming you'll set up a logout endpoint in your server)
-				fetch("/users/logout", { method: "POST" })
-					.then((response) => response.json())
-					.then((data) => {
-						// If logout is successful, redirect to login.html
-						if (data.success) {
-							window.location.href = "login.html";
-						} else {
-							console.error("Error logging out:", data.error);
-						}
-					});
-			});
-		});
-	</script>
-	<script type="module" src="./index.js"></script>
-	<!-- index.html -->
-	<!-- <script type="module">
       // 送信時の処理
       document.getElementById("submit").onclick = async (event) => {
         event.preventDefault();
@@ -64,6 +67,5 @@
         }
       };
     </script> -->
-</body>
-
+  </body>
 </html>

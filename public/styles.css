@@ -1,9 +1,21 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  color:#353238;
+  color: #353238;
 
   /* background-color: #6F9CEB; */
+}
+.user-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #e9c8c8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
 body {
@@ -13,49 +25,48 @@ body {
   flex-direction: column;
 }
 
-textarea{
+textarea {
   width: 100%;
   height: 100px;
 }
 
-.space{
+.space {
   width: 100%;
   margin-top: 3px;
   height: 15%;
 }
 
-
 /*
 * 投稿一覧での投稿の表示
 */
-#get-contents{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 16px;
-	margin-top: 16px;
+#get-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
 }
 
-div .dreams{
-	color: #353238;
-	background-color: #EEEEEE;
-	border: 2px solid #353238;
-	width: 80vw;
-    /* height: 100px; */
-    border-radius: 16px;
-	font-weight: bold;
-	padding: 16px 24px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	/* color: #FFCD29; */
+div .dreams {
+  color: #353238;
+  background-color: #eeeeee;
+  border: 2px solid #353238;
+  width: 80vw;
+  /* height: 100px; */
+  border-radius: 16px;
+  font-weight: bold;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* color: #FFCD29; */
 }
 
 [id^="dream-title"] {
   font-size: 20px;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 /*
@@ -110,16 +121,16 @@ input[type="checkbox"]::after {
 }
 
 input[type="checkbox"]::before {
-	background-color: #FFF;
-	border-radius: 0%;
-	border: 1px solid #666464;
-	width: 20px;
-	/*チェックボックスの横幅*/
-	height: 20px;
-	/*チェックボックスの縦幅*/
-	transform: translateY(-50%);
-	top: 50%;
-	left: 5px;
+  background-color: #fff;
+  border-radius: 0%;
+  border: 1px solid #666464;
+  width: 20px;
+  /*チェックボックスの横幅*/
+  height: 20px;
+  /*チェックボックスの縦幅*/
+  transform: translateY(-50%);
+  top: 50%;
+  left: 5px;
 }
 
 input[type="checkbox"]::after {
@@ -154,12 +165,11 @@ button {
   background: none;
 }
 
-
 /*
 * post-detail.htmlの中身を装飾
 */
 
-#post-detail-title{
+#post-detail-title {
   display: inline-block;
   margin-top: 16px;
   border-bottom: 3px solid #666464;
@@ -167,16 +177,7 @@ button {
   font-size: 24px;
 }
 
-#post-detail-tag{
-  display: inline-block;
-  margin-top: 16px;
-  font-weight: bold;
-  border-bottom: 3px solid #666464;
-  font-size: 24px;
-
-}
-
-#post-detail-content{
+#post-detail-tag {
   display: inline-block;
   margin-top: 16px;
   font-weight: bold;
@@ -184,7 +185,15 @@ button {
   font-size: 24px;
 }
 
-#post-detail-comment{
+#post-detail-content {
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: bold;
+  border-bottom: 3px solid #666464;
+  font-size: 24px;
+}
+
+#post-detail-comment {
   display: inline-block;
   margin-top: 16px;
   font-weight: bold;
@@ -195,7 +204,7 @@ button {
 /* 名称一致しているところあるしやばくね？？
 * 投稿一覧のページdreamsで管理するようにしちまったよ...あっちはクラスだけど...
 */
-#dreams{ 
+#dreams {
   display: inline-block;
   margin-top: 16px;
   font-weight: bold;
@@ -205,33 +214,32 @@ button {
   font-size: 24px;
 }
 
-#dream-title{
+#dream-title {
   margin-top: 8px;
   font-size: 14px;
 }
 
-#dream-tag{
+#dream-tag {
   margin-top: 8px;
   font-size: 14px;
 }
 
-#dream-content{
+#dream-content {
   margin-top: 8px;
   font-size: 14px;
 }
 
-.comment{
+.comment {
   margin-top: 8px;
   font-size: 14px;
-
 }
 
-#post-comment-button{
+#post-comment-button {
   /* padding: 8px 32px; */
-	background-color: #EEEEEE;
-	border-radius: 10px;
-	font-weight: bold;
-	font-size: 20px;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 20px;
 
   display: block;
   margin-top: 8px;
@@ -245,26 +253,26 @@ button {
 */
 
 header {
-	top: 0;
-	position:fixed;
-	height: 10%;
-	width:  100%;
-	background-color: #EEEEEE;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	border-bottom: 2px solid #353238;
+  top: 0;
+  position: fixed;
+  height: 84.4px;
+  width: 100%;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #353238;
 }
 
 header .title {
-	letter-spacing: 0.1em;
-	font-weight: bold;
-	font-size: 30px;
-	color: #353238;
-	padding: 10px 30px;
-	background-color: #EEEEEE;
-	border-radius: 10px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 30px;
+  color: #353238;
+  padding: 10px 30px;
+  background-color: #eeeeee;
+  border-radius: 10px;
 }
 
 /*
@@ -272,13 +280,13 @@ header .title {
 */
 
 main {
-	flex: 1;
-	padding: 0 16px;
-	margin-top: 18%;
-	height: 90%;
-	width: 100%;
-	overflow-y: auto;
-	background-color: #BAD3FF;
+  flex: 1;
+  padding: 0 16px;
+  margin-top: 84.4px;
+  height: 80%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #bad3ff;
 }
 
 /* main .space {
@@ -291,32 +299,32 @@ main {
 */
 
 footer {
-	position:fixed;
-	bottom: 0;
-	height: 10%;
-	width: 100%;
-	background-color: #EEEEEE;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	border-top: 2px solid #353238;
+  position: fixed;
+  bottom: 0;
+  height: 84.4px;
+  width: 100%;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid #353238;
 }
 
 footer .submit {
-	padding: 8px 32px;
-	background-color: #EEEEEE;
-	border-radius: 10px;
-	font-weight: bold;
-	font-size: 20px;
+  padding: 8px 32px;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
-footer > .jump-index{
+footer > .jump-index {
   margin-right: 16px;
 }
 #no-comment {
-	display: none;
-  }
-  #with-comment {
-	display: none;
-  }
+  display: none;
+}
+#with-comment {
+  display: none;
+}

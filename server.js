@@ -16,6 +16,11 @@ const mySqlClient = await new Client().connect({
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
+  if (req.method === "POST" && pathname === "/users/logout") {
+    return new Response(JSON.stringify({ success: true }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 
   if (req.method === "GET" && pathname === "/dream-title") {
     const dreams = await mySqlClient.query(

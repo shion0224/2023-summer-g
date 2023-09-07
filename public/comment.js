@@ -1,6 +1,26 @@
 window.onload = async () => {
   const dreamId = localStorage.getItem("dream_id");
+  try {
+    const response = await fetch(`/dreams/${dreamId}/comments`);
+    const comments = await response.json();
+    if (comments.length > 0) {
+      const withComment = document.getElementById("with-comment");
+      withComment.style.display = "block";
+    } else {
+      const noComment = document.getElementById("no-comment");
+      noComment.style.display = "block";
+    }
+    const commentsListDiv = document.getElementById("comments-list");
 
+    comments.forEach((comment) => {
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comment");
+      commentDiv.innerText = comment.content;
+      commentsListDiv.prepend(commentDiv);
+    });
+  } catch (error) {
+    console.error("Error fetching the comments:", error);
+  }
   if (dreamId) {
     try {
       const response = await fetch(`/dreams/${dreamId}`);
@@ -12,30 +32,33 @@ window.onload = async () => {
     }
   }
 };
-// document.getElementById("post-comment-button").onclick = async () => {
+document.getElementById("post-comment-button").onclick = async () => {
+  const commentContents = document.getElementById("post-contents").value;
 
-//   const commentContents = document.getElementById("comment-contents").value;
+  if (!commentContents.trim()) {
+    alert("Comment cannot be empty.");
+    return;
+  }
 
-//   if (!commentContents.trim()) {
-//     alert("Comment cannot be empty.");
-//     return;
-//   }
+  const dreamId = localStorage.getItem("dream_id");
+  if (!dreamId) {
+    alert("No associated dream selected.");
+    return;
+  }
 
-//   const dreamId = localStorage.getItem("dream_id");
-//   if (!dreamId) {
-//     alert("No associated dream selected.");
-//     return;
-//   }
-
-//   try {
-//     const response = await fetch(`/dreams/${dreamId}/comments`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ comment: commentContents }),
-//     });
-//     const result = await response.text();
-//     alert(result);
-//   } catch (error) {
-//     console.error("Error posting comment:", error);
-//   }
-// };
+  try {
+    const response = await fetch(`/dreams/${dreamId}/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ comment: commentContents }),
+    });
+    const result = await response.text();
+    const dreamDiv = document.getElementById("comments-list");
+    const dreamContentDiv = document.createElement("div");
+    // dreamTitleDiv.setAttribute("id", `dream-title${i}`);
+    dreamContentDiv.textContent = commentContents;
+    dreamDiv.appendChild(dreamContentDiv);
+  } catch (error) {
+    console.error("Error posting comment:", error);
+  }
+};

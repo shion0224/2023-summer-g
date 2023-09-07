@@ -93,22 +93,56 @@ serve(async (req) => {
     }));
     return new Response(JSON.stringify(filteredDreams));
   }
+  // Endpoint to retrieve comments for a specific dream
+  if (
+    req.method === "GET" &&
+    pathname.startsWith("/dreams/") &&
+    pathname.endsWith("/comments")
+  ) {
+    const dreamId = parseInt(pathname.split("/")[2]); // Assuming "/dreams/{dreamId}/comments" format
+
+    const comments = await mySqlClient.query(
+      "SELECT content FROM comments WHERE dream_id = ? ORDER BY timestamp DESC LIMIT 50",
+      [dreamId]
+    );
+
+    return new Response(JSON.stringify(comments));
+  }
+
   if (
     req.method === "POST" &&
     pathname.startsWith("/dreams/") &&
     pathname.endsWith("/comments")
   ) {
-    const dreamId = parseInt(pathname.split("/")[2]); // Assuming "/dreams/{dreamId}/comments" format
+    const dreamId = parseInt(pathname.split("/")[2]);
     const reqJson = await req.json();
     const commentContent = reqJson.comment;
 
     if (commentContent === "") {
       return new Response("Comment cannot be empty.");
     } else {
-      const insertResult = await mySqlClient.execute(
+      // Inserting comment into the comments table
+      await mySqlClient.execute(
         `INSERT INTO comments (dream_id, content) VALUES (?, ?);`,
         [dreamId, commentContent]
       );
+
+      // Appending the comment to the related_comment column in the dreams table
+      const currentDream = await mySqlClient.query(
+        "SELECT related_comment FROM dreams WHERE dream_id = ?",
+        [dreamId]
+      );
+
+      const currentRelatedComments = currentDream[0].related_comment || "";
+      const updatedComments = currentRelatedComments
+        ? currentRelatedComments + "," + commentContent
+        : commentContent;
+
+      await mySqlClient.execute(
+        "UPDATE dreams SET related_comment = ? WHERE dream_id = ?",
+        [updatedComments, dreamId]
+      );
+
       return new Response("Comment added successfully.");
     }
   }
@@ -118,9 +152,10 @@ serve(async (req) => {
     const dreamId = parseInt(pathname.split("/")[2]); // Assuming "/dreams/{dreamId}/comments" format
 
     const comments = await mySqlClient.query(
-      "SELECT * FROM dreams WHERE dream_id = ? ORDER BY timestamp DESC LIMIT 50",
+      "SELECT * FROM dreams WHERE dream_id = ? ORDER BY timestamp ASC LIMIT 50",
       [dreamId]
     );
+
     return new Response(JSON.stringify(comments));
   }
   console.log("Attaching event to post-comment-button");

@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  color:#353238;
+
   /* background-color: #6F9CEB; */
 }
 
@@ -156,44 +158,63 @@ button {
   display: inline-block;
   margin-top: 16px;
   border-bottom: 3px solid #666464;
-
+  font-weight: bold;
+  font-size: 24px;
 }
 
 #post-detail-tag{
   display: inline-block;
   margin-top: 16px;
+  font-weight: bold;
   border-bottom: 3px solid #666464;
+  font-size: 24px;
+
 }
 
 #post-detail-content{
   display: inline-block;
   margin-top: 16px;
+  font-weight: bold;
   border-bottom: 3px solid #666464;
+  font-size: 24px;
 }
 
 #post-detail-comment{
   display: inline-block;
   margin-top: 16px;
+  font-weight: bold;
   border-bottom: 3px solid #666464;
+  font-size: 24px;
 }
 
 #dream-title{
   margin-top: 8px;
+  font-size: 14px;
 }
 
 #dream-tag{
   margin-top: 8px;
+  font-size: 14px;
 }
 
 #dream-content{
   margin-top: 8px;
+  font-size: 14px;
 }
 
 .comment{
   margin-top: 8px;
+  font-size: 14px;
+
 }
 
 #post-comment-button{
+  /* padding: 8px 32px; */
+	background-color: #EEEEEE;
+	border-radius: 10px;
+	font-weight: bold;
+	font-size: 20px;
+
   display: block;
   margin-top: 8px;
   margin-left: auto;

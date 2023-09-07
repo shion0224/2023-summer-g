@@ -39,6 +39,11 @@ div .dreams{
 	/* color: #FFCD29; */
 }
 
+[id^="dream-title"] {
+  font-size: 20px;
+  font-weight:bold;
+}
+
 /*
 * post.htmlの中身を
 * 中央揃えにしている。(idやクラスを洗い出し、ページごとに共通にしたほうが良い。)

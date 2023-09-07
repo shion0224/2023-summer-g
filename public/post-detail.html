@@ -12,17 +12,17 @@
       <div class="title">詳細画面</div>
     </header>
     <main>
-      <h2>タイトル</h2>
+      <h2 id="post-detail-title">タイトル</h2>
       <h3 id="dream-title">タイトル名</h3>
 
       <!-- タグのデータのDB保存が終わり次第手をつける。 -->
-      <h2>タグ</h2>
-      <h3>#ホラー #恋愛 #コメディー</h3>
+      <h2 id="post-detail-tag">タグ</h2>
+      <h3 id="dream-tag">#ホラー #恋愛 #コメディー</h3>
 
-      <h2>内容</h2>
+      <h2 id="post-detail-content">内容</h2>
       <h3 id="dream-content">hogehoge</h3>
 
-      <h2>コメント</h2>
+      <h2 id="post-detail-comment">コメント</h2>
       <div id="no-comment">
         <h3>まだコメントはありません。</h3>
       </div>
@@ -32,24 +32,19 @@
         </div>
       </div>
 
-      <h2 id="dreams">夢の内容</h2>
+      <h2 id="dreams">夢の続きを書き込む</h2>
       <form>
-        <textarea
-          name="contents"
-          id="post-contents"
-          cols="30"
-          rows="10"
-        ></textarea>
+        <textarea name="contents" id="post-contents" ></textarea>
         <!-- <input type="submit" value="投稿する" > -->
       </form>
-      <button class="submit" id="post-comment-button">post comment</button>
+      <button class="submit" id="post-comment-button">投稿する</button>
 
       <div class="space"></div>
 
     </main>
     <footer>
-      <button class="submit" onclick="location.href='index.html'">投稿一覧</button>
-      <button class="submit" onclick="location.href='post.html'">新規投稿</button>
+      <button class="submit jump-index" onclick="location.href='index.html'">投稿一覧</button>
+      <button class="submit jump-post" onclick="location.href='post.html'">新規投稿</button>
     </footer>
 
 

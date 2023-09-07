@@ -6,6 +6,7 @@ window.onload = async () => {
     window.location.pathname === "/" ||
     window.location.pathname === "/index.html"
   ) {
+    localStorage.removeItem("dream_id");
     try {
       const response = await fetch("/dreams");
 

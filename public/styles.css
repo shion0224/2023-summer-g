@@ -14,14 +14,24 @@ body {
 /*
 * 投稿一覧での投稿の表示
 */
+#get-contents{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	margin-top: 16px;
+}
 
-div#dreams{
-	color: #fff;
-	background-color: #0D99FF;
-	width: 358px;
-    height: 70px;
-    border-radius: 100vh;
-	margin-top: 10px;
+div .dreams{
+	color: #353238;
+	background-color: #EEEEEE;
+	border: 2px solid #353238;
+	width: 80vw;
+    /* height: 100px; */
+    border-radius: 9999px;
+	font-weight: bold;
+	padding: 16px 24px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -82,7 +92,7 @@ input[type="checkbox"]::after {
 }
 
 input[type="checkbox"]::before {
-	background-color: #fff;
+	background-color: #FFF;
 	border-radius: 0%;
 	border: 1px solid #666464;
 	width: 20px;
@@ -131,7 +141,7 @@ header {
 	position:fixed;
 	height: 84.4px;
 	width:  100%;
-	background-color: #0D99FF;
+	background-color: #75D7F0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -143,8 +153,12 @@ header {
 */
 
 header .title {
+	letter-spacing: 0.1em;
+	font-weight: bold;
+	font-size: 30px;
+	color: #353238;
 	padding: 20px 60px;
-	background-color: #FFCD29;
+	background-color: #75D7F0;
 	border-radius: 10px;
 }
 
@@ -159,7 +173,7 @@ main {
 	height: 80%;
 	width: 100%;
 	overflow-y: auto;
-	background-color: #75D7F0;
+	background-color: #353238;
 }
 
 
@@ -177,15 +191,18 @@ footer {
 	bottom: 0;
 	height: 84.4px;
 	width: 100%;
-	background-color: #0D99FF;
+	background-color: #EEEEEE;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	border-top: 2px solid #353238;
 }
 
 footer .submit {
 	padding: 20px 60px;
-	background-color: #FFCD29;
+	background-color: #75D7F0;
 	border-radius: 10px;
+	font-weight: bold;
+	font-size: 20px;
 }

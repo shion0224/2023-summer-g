@@ -277,28 +277,34 @@ header .title {
   font-weight: bold;
   font-size: 30px;
   color: #353238;
-  padding: 10px 30px;
+  padding: 10px 16px;
   background-color: #eeeeee;
   border-radius: 10px;
 
 }
 
 #logout-button{
-  /* display: flex; */
-  /* position: absolute; */
+  padding: 8px 16px;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  border: 2px solid #353238;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 .user-circle {
 
   height: 70px;
-  border-radius: 50%;
-  background-color: #e9c8c8;
+  border-radius: 20px;
+  background-color: #eeeeee;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* position: absolute; */
-  top: 10px;
-  left: 10px;
+  padding: 8px 16px;
+  font-weight: bold;
+  font-size: 12px;
+  border: 2px solid #353238;
+
 }
 
 /*
@@ -338,6 +344,7 @@ footer {
 footer .submit {
   padding: 8px 32px;
   background-color: #eeeeee;
+  border: 2px solid #353238;
   border-radius: 10px;
   font-weight: bold;
   font-size: 20px;

@@ -57,13 +57,14 @@ serve(async (req) => {
     const titles = reqJson.titles;
     const contents = reqJson.contents;
     const tag = reqJson.tag;
+    const did = reqJson.did;
     if (contents === "" && titles === "" && tag === "") {
       return new Response("空文字です。");
     } else {
       // INSERTなど、書込用SQLを実行する
       const insertResult = await mySqlClient.execute(
-        `INSERT INTO dreams (title,content,tag) VALUES (?,?,?);`,
-        [titles, contents, tag]
+        `INSERT INTO dreams (title,content,tag,did) VALUES (?,?,?,?);`,
+        [titles, contents, tag,did]
       );
 
       return new Response("文字です。");
@@ -176,6 +177,30 @@ serve(async (req) => {
     return new Response(JSON.stringify(comments));
   }
   console.log("Attaching event to post-comment-button");
+
+  /*
+   * profileに投稿を表示させる。
+   */
+
+  if (req.method === "GET" && pathname === ("/profile")) {
+
+    const sql = await mySqlClient.query(
+      "SELECT * FROM dreams JOIN users ON dreams.did = users.did ORDER BY timestamp DESC  "
+    );
+    // titleとcontentの両方を含むオブジェクトの配列を作成
+    const result = sql.map((dream) => ({
+      title: dream.title,
+      content: dream.content,
+      dream_id: dream.dream_id,
+      did: dream.did,
+    }));
+
+    // JSON形式でResponseを返す
+    return new Response(JSON.stringify(result), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   // serve.js
   // ユーザー新規登録API
   if (req.method === "POST" && pathname === "/users/register") {

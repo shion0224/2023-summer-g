@@ -16,22 +16,6 @@ body {
 
 
 
-.post-container {
-    display: flex;
-    flex-wrap: wrap; /* 折り返しを有効にする */
-    width: 100%; /* コンテナの幅を最大にする */
-    gap: 20px; /* 投稿間の間隔を調整 */
-	margin-top: 16px;
-}
-.post {
-    width: 100%; /* 幅を33.33%に設定し、gapを考慮して20pxを減算 */
-    background-color: #F0F0F0;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
 
 textarea {
   width: 100%;
@@ -57,7 +41,6 @@ div .dreams {
   background-color: #eeeeee;
   border: 2px solid #353238;
   width: 80vw;
-  /* height: 100px; */
   border-radius: 16px;
   font-weight: bold;
   padding: 16px 24px;
@@ -65,7 +48,6 @@ div .dreams {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* color: #FFCD29; */
 }
 
 [id^="dream-title"] {
@@ -259,6 +241,26 @@ button {
   margin-right: auto;
   width: 150px; /* 例としての値。実際の幅に応じて変更してください */
 }
+
+
+/*
+* profile
+*/
+
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.post-container{
+  align-items: center;
+}
+
 
 /*
 * header

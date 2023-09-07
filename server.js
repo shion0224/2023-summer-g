@@ -92,7 +92,7 @@ serve(async (req) => {
     });
   }
 
-  /* */
+  /* 消してもいいのでは？*/
 
   if (req.method === "GET" && pathname.startsWith("/dreams/paginated")) {
     const params = new URLSearchParams(new URL(req.url).search);

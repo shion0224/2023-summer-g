@@ -284,10 +284,10 @@ header {
 header .title {
   letter-spacing: 0.1em;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 24px;
   color: #353238;
   padding: 10px 16px;
-  background-color: #eeeeee;
+  /* background-color: #eeeeee; */
   border-radius: 10px;
 
 }

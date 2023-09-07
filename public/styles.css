@@ -195,6 +195,7 @@ button {
   margin-top: 16px;
   font-weight: bold;
   border-bottom: 3px solid #666464;
+  /* background-color: #EEEEEEE; */
   margin-bottom: 16px;
   font-size: 24px;
 }

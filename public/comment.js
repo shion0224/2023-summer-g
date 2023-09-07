@@ -13,7 +13,7 @@ window.onload = async () => {
     const commentsListDiv = document.getElementById("comments-list");
 
     comments.forEach((comment) => {
-      const commentDiv = document.createElement("div");
+      const commentDiv = document.createElement("h3");
       commentDiv.classList.add("comment");
       commentDiv.innerText = comment.content;
       commentsListDiv.prepend(commentDiv);

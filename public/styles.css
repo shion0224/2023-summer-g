@@ -292,6 +292,10 @@ footer .submit {
 	font-weight: bold;
 	font-size: 20px;
 }
+
+footer > .jump-index{
+  margin-right: 16px;
+}
 #no-comment {
 	display: none;
   }

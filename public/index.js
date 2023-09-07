@@ -26,6 +26,11 @@ window.onload = async () => {
         dreamTitleDiv.textContent = data[i].title; // タイトル名を挿入
         dreamDiv.appendChild(dreamTitleDiv);
 
+        const dreamTagDiv = document.createElement("div");
+        dreamTagDiv.setAttribute("id", `dream-tag-detailg${i}`);
+        dreamTagDiv.textContent = data[i].tag; // Tagを挿入
+        dreamDiv.appendChild(dreamTagDiv);
+
         // dream-content1, dream-content2, ... のようなdiv要素をdreamDivの子要素として作成
         const dreamContentDiv = document.createElement("div");
         dreamContentDiv.setAttribute("id", `dream-content${i}`);
@@ -43,15 +48,28 @@ window.onload = async () => {
   }
 
   if (window.location.pathname === "/post-detail.html") {
+    const dreamId = localStorage.getItem("dream_id");
+    if (!dreamId) {
+      console.error("No dream ID found in local storage.");
+      return;
+    }
+
     try {
-      const response = await fetch("/dream-title");
+      const response = await fetch(`/dream-title?dream_id=${dreamId}`);
       document.getElementById("dream-title").innerText = await response.text();
     } catch (error) {
       console.error("Error fetching from /dream-title:", error);
     }
-
     try {
-      const response = await fetch("/dream-content");
+      const response = await fetch(`/dream-tag-detail?dream_id=${dreamId}`);
+
+      document.getElementById("dream-tag-detail").innerText =
+        await response.text();
+    } catch (error) {
+      console.error("Error fetching from /dream-tag-detail:", error);
+    }
+    try {
+      const response = await fetch(`/dream-content?dream_id=${dreamId}`);
       document.getElementById("dream-content").innerText =
         await response.text();
     } catch (error) {
@@ -59,15 +77,3 @@ window.onload = async () => {
     }
   }
 };
-
-// document.getElementById("fetch-dreams-button").onclick = async () => {
-//   try {
-//     const response = await fetch("/dreams");
-//     const dreams = await response.json();
-//     console.log(dreams);
-//     const userIds = dreams.map((dream) => dream.title);
-//     document.getElementById("dreams-container").innerText = userIds.join(", ");
-//   } catch (error) {
-//     console.error("Error fetching dreams:", error);
-//   }
-// };

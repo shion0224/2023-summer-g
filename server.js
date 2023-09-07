@@ -29,6 +29,15 @@ serve(async (req) => {
     const title = dreams[0].title;
     return new Response(title);
   }
+  if (req.method === "GET" && pathname === "/dream-tag-detail") {
+    const params = new URLSearchParams(new URL(req.url).search);
+    const dreamId = params.get("dream_id");
+    const dreams = await mySqlClient.query(
+      "SELECT tag FROM dreams WHERE dream_id = ?"
+    );
+    const tag = dreams[0]?.tag || "No tag found";
+    return new Response(tag);
+  }
 
   if (req.method === "GET" && pathname === "/dream-content") {
     const dreams = await mySqlClient.query(
@@ -47,13 +56,14 @@ serve(async (req) => {
     console.log(reqJson);
     const titles = reqJson.titles;
     const contents = reqJson.contents;
-    if (contents === "" && titles === "") {
+    const tag = reqJson.tag;
+    if (contents === "" && titles === "" && tag === "") {
       return new Response("空文字です。");
     } else {
       // INSERTなど、書込用SQLを実行する
       const insertResult = await mySqlClient.execute(
-        `INSERT INTO dreams (title,content) VALUES (?,?);`,
-        [titles, contents]
+        `INSERT INTO dreams (title,content,tag) VALUES (?,?,?);`,
+        [titles, contents, tag]
       );
 
       return new Response("文字です。");

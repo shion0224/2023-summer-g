@@ -17,7 +17,7 @@
 
       <!-- タグのデータのDB保存が終わり次第手をつける。 -->
       <h2 id="post-detail-tag">タグ</h2>
-      <h3 id="dream-tag">#ホラー #恋愛 #コメディー</h3>
+      <h3 id="dream-tag-detail"></h3>
 
       <h2 id="post-detail-content">内容</h2>
       <h3 id="dream-content">hogehoge</h3>
@@ -34,19 +34,21 @@
 
       <h2 id="dreams">夢の続きを書き込む</h2>
       <form>
-        <textarea name="contents" id="post-contents" ></textarea>
+        <textarea name="contents" id="post-contents"></textarea>
         <!-- <input type="submit" value="投稿する" > -->
       </form>
       <button class="submit" id="post-comment-button">投稿する</button>
 
       <div class="space"></div>
-
     </main>
     <footer>
-      <button class="submit jump-index" onclick="location.href='index.html'">投稿一覧</button>
-      <button class="submit jump-post" onclick="location.href='post.html'">新規投稿</button>
+      <button class="submit jump-index" onclick="location.href='index.html'">
+        投稿一覧
+      </button>
+      <button class="submit jump-post" onclick="location.href='post.html'">
+        新規投稿
+      </button>
     </footer>
-
 
     <script type="module" src="./index.js"></script>
     <script type="module" src="./comment.js"></script>

@@ -3,14 +3,20 @@ window.onload = async () => {
   try {
     const response = await fetch(`/dreams/${dreamId}/comments`);
     const comments = await response.json();
-
+    if (comments.length > 0) {
+      const withComment = document.getElementById("with-comment");
+      withComment.style.display = "block";
+    } else {
+      const noComment = document.getElementById("no-comment");
+      noComment.style.display = "block";
+    }
     const commentsListDiv = document.getElementById("comments-list");
 
     comments.forEach((comment) => {
       const commentDiv = document.createElement("div");
       commentDiv.classList.add("comment");
       commentDiv.innerText = comment.content;
-      commentsListDiv.appendChild(commentDiv);
+      commentsListDiv.prepend(commentDiv);
     });
   } catch (error) {
     console.error("Error fetching the comments:", error);
@@ -47,7 +53,11 @@ document.getElementById("post-comment-button").onclick = async () => {
       body: JSON.stringify({ comment: commentContents }),
     });
     const result = await response.text();
-    alert(result);
+    const dreamDiv = document.getElementById("comments-list");
+    const dreamContentDiv = document.createElement("div");
+    // dreamTitleDiv.setAttribute("id", `dream-title${i}`);
+    dreamContentDiv.textContent = commentContents;
+    dreamDiv.appendChild(dreamContentDiv);
   } catch (error) {
     console.error("Error posting comment:", error);
   }

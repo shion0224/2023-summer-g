@@ -152,7 +152,7 @@ serve(async (req) => {
     const dreamId = parseInt(pathname.split("/")[2]); // Assuming "/dreams/{dreamId}/comments" format
 
     const comments = await mySqlClient.query(
-      "SELECT * FROM dreams WHERE dream_id = ? ORDER BY timestamp DESC LIMIT 50",
+      "SELECT * FROM dreams WHERE dream_id = ? ORDER BY timestamp ASC LIMIT 50",
       [dreamId]
     );
 

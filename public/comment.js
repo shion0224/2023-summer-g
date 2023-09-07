@@ -27,6 +27,7 @@ window.onload = async () => {
       const dream = await response.json();
       document.getElementById("dream-title").innerText = dream[0].title;
       document.getElementById("dream-content").innerText = dream[0].content;
+      document.getElementById("dream-tag-detail").innerText = dream[0].tag;
     } catch (error) {
       console.error("Error fetching the associated dream:", error);
     }
@@ -45,6 +46,7 @@ document.getElementById("post-comment-button").onclick = async () => {
     alert("No associated dream selected.");
     return;
   }
+  window.location.href = "/post-detail.html";
 
   try {
     const response = await fetch(`/dreams/${dreamId}/comments`, {

@@ -71,6 +71,13 @@ div .dreams {
 [id^="dream-title"] {
   font-size: 20px;
   font-weight: bold;
+  word-break: break-word;
+}
+
+[id^="dream-content"] {
+  font-size: 20px;
+  font-weight: bold;
+  word-break: break-word;
 }
 
 /*

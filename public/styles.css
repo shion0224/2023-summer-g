@@ -5,18 +5,7 @@
 
   /* background-color: #6F9CEB; */
 }
-.user-circle {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background-color: #e9c8c8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
+
 
 body {
   width: 100%;
@@ -180,18 +169,7 @@ button {
   background: none;
 }
 
-header {
-	top: 0;
-	position:fixed;
-	height: 84.4px;
-	width:  100%;
-	background-color: #EEEEEE;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	border-bottom: 2px solid #353238;
-}	
+
 /*
 * post-detail.htmlの中身を装飾
 */
@@ -286,10 +264,12 @@ header {
   width: 100%;
   background-color: #eeeeee;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   border-bottom: 2px solid #353238;
+  justify-content: space-between;  /* 3つの要素を等間隔に分散させる */
+  padding: 10px;     
 }
 
 header .title {
@@ -300,6 +280,25 @@ header .title {
   padding: 10px 30px;
   background-color: #eeeeee;
   border-radius: 10px;
+
+}
+
+#logout-button{
+  /* display: flex; */
+  /* position: absolute; */
+}
+
+.user-circle {
+
+  height: 70px;
+  border-radius: 50%;
+  background-color: #e9c8c8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: absolute; */
+  top: 10px;
+  left: 10px;
 }
 
 /*
@@ -316,6 +315,7 @@ main {
 	background-color: #bad3ff;
 	margin-bottom: 84.4px;
 }
+
 
 
 /*

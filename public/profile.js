@@ -8,20 +8,20 @@ window.onload = async () => {
         for (let i = 0;  i < data.length; i++) {  // data.lengthをチェックしてindexが範囲外にならないようにする
             if(localStorage.getItem("did") === data[i].did){
                 const postDiv = document.createElement('div');
-                postDiv.id = `post-${i}`;
+                postDiv.className = `dreams`;
     
                 const postTitleDiv = document.createElement('div');
-                postTitleDiv.id = `post-title${i}`;
+                postTitleDiv.id = `profile-post-title${i}`;
                 postTitleDiv.innerText = data[i].title;  // titleをdiv要素の中身に設定
                 postDiv.appendChild(postTitleDiv);
     
                 const postTagDetailDiv = document.createElement('div');
-                postTagDetailDiv.id = `post-tag${i}`;
+                postTagDetailDiv.id = `profile-post-tag${i}`;
                 postTagDetailDiv.innerText = data[i].tag;  // tagをdiv要素の中身に設定
                 postDiv.appendChild(postTagDetailDiv);
     
                 const postContentDiv = document.createElement('div');
-                postContentDiv.id = `post-content${i}`;
+                postContentDiv.id = `profile-post-content${i}`;
                 postContentDiv.innerText = data[i].content;  // contentをdiv要素の中身に設定
                 postDiv.appendChild(postContentDiv);
     

@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  /* background-color: #75D7F0; */
+  /* background-color: #6F9CEB; */
 }
 
 body {
@@ -140,11 +140,13 @@ header {
 	position:fixed;
 	height: 84.4px;
 	width:  100%;
-	background-color: #75D7F0;
+	background-color: #EEEEEE;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	border-bottom: 2px solid #353238;
+
 }
 
 /*
@@ -156,8 +158,8 @@ header .title {
 	font-weight: bold;
 	font-size: 30px;
 	color: #353238;
-	padding: 20px 60px;
-	background-color: #75D7F0;
+	padding: 10px 30px;
+	background-color: #EEEEEE;
 	border-radius: 10px;
 }
 
@@ -172,7 +174,7 @@ main {
 	height: 80%;
 	width: 100%;
 	overflow-y: auto;
-	background-color: #353238;
+	background-color: #EEEEEE;
 }
 
 main .space {
@@ -198,8 +200,8 @@ footer {
 }
 
 footer .submit {
-	padding: 20px 60px;
-	background-color: #75D7F0;
+	padding: 8px 32px;
+	background-color: #EEEEEE;
 	border-radius: 10px;
 	font-weight: bold;
 	font-size: 20px;

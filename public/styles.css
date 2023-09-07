@@ -11,6 +11,23 @@ body {
   flex-direction: column;
 }
 
+
+.post-container {
+    display: flex;
+    flex-wrap: wrap; /* 折り返しを有効にする */
+    width: 100%; /* コンテナの幅を最大にする */
+    gap: 20px; /* 投稿間の間隔を調整 */
+	margin-top: 16px;
+}
+.post {
+    width: 100%; /* 幅を33.33%に設定し、gapを考慮して20pxを減算 */
+    background-color: #F0F0F0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 /*
 * 投稿一覧での投稿の表示
 */
@@ -151,6 +168,7 @@ header {
 	align-items: center;
 	justify-content: center;
 	border-bottom: 2px solid #353238;
+	
 
 }
 
@@ -180,12 +198,13 @@ main {
 	width: 100%;
 	overflow-y: auto;
 	background-color: #EEEEEE;
+	margin-bottom: 84.4px;
 }
 
-main .space {
+/* main .space {
   margin-top: 3px;
   height: 85px;
-}
+} */
 
 /*
 * footer

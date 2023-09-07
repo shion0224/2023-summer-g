@@ -242,7 +242,7 @@ button {
 header {
 	top: 0;
 	position:fixed;
-	height: 84.4px;
+	height: 10%;
 	width:  100%;
 	background-color: #EEEEEE;
 	display: flex;
@@ -269,8 +269,8 @@ header .title {
 main {
 	flex: 1;
 	padding: 0 16px;
-	margin-top: 84.4px;
-	height: 80%;
+	margin-top: 18%;
+	height: 90%;
 	width: 100%;
 	overflow-y: auto;
 	background-color: #BAD3FF;
@@ -278,7 +278,7 @@ main {
 
 main .space {
   margin-top: 3px;
-  height: 85px;
+  height: 15%;
 }
 
 /*
@@ -288,7 +288,7 @@ main .space {
 footer {
 	position:fixed;
 	bottom: 0;
-	height: 84.4px;
+	height: 10%;
 	width: 100%;
 	background-color: #EEEEEE;
 	display: flex;

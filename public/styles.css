@@ -11,6 +11,13 @@ body {
   flex-direction: column;
 }
 
+textarea{
+  width: 100%;
+  height: 150px;
+}
+
+
+
 /*
 * 投稿一覧での投稿の表示
 */
@@ -140,6 +147,64 @@ button {
   background: none;
 }
 
+
+/*
+* post-detail.htmlの中身を装飾
+*/
+
+#post-detail-title{
+  display: inline-block;
+  margin-top: 16px;
+  border-bottom: 3px solid #666464;
+
+}
+
+#post-detail-tag{
+  display: inline-block;
+  margin-top: 16px;
+  border-bottom: 3px solid #666464;
+}
+
+#post-detail-content{
+  display: inline-block;
+  margin-top: 16px;
+  border-bottom: 3px solid #666464;
+}
+
+#post-detail-comment{
+  display: inline-block;
+  margin-top: 16px;
+  border-bottom: 3px solid #666464;
+}
+
+#dream-title{
+  margin-top: 8px;
+}
+
+#dream-tag{
+  margin-top: 8px;
+}
+
+#dream-content{
+  margin-top: 8px;
+}
+
+.comment{
+  margin-top: 8px;
+}
+
+#post-comment-button{
+  display: block;
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px; /* 例としての値。実際の幅に応じて変更してください */
+}
+
+/*
+* header
+*/
+
 header {
 	top: 0;
 	position:fixed;
@@ -151,12 +216,7 @@ header {
 	align-items: center;
 	justify-content: center;
 	border-bottom: 2px solid #353238;
-
 }
-
-/*
-* header
-*/
 
 header .title {
 	letter-spacing: 0.1em;
@@ -217,4 +277,3 @@ footer .submit {
   #with-comment {
 	display: none;
   }
-

@@ -3,6 +3,18 @@
   margin: 0;
   /* background-color: #6F9CEB; */
 }
+.user-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #e9c8c8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
 
 body {
   width: 100%;
@@ -14,34 +26,34 @@ body {
 /*
 * 投稿一覧での投稿の表示
 */
-#get-contents{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 16px;
-	margin-top: 16px;
+#get-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
 }
 
-div .dreams{
-	color: #353238;
-	background-color: #EEEEEE;
-	border: 2px solid #353238;
-	width: 80vw;
-    /* height: 100px; */
-    border-radius: 16px;
-	font-weight: bold;
-	padding: 16px 24px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	/* color: #FFCD29; */
+div .dreams {
+  color: #353238;
+  background-color: #eeeeee;
+  border: 2px solid #353238;
+  width: 80vw;
+  /* height: 100px; */
+  border-radius: 16px;
+  font-weight: bold;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* color: #FFCD29; */
 }
 
 [id^="dream-title"] {
   font-size: 20px;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 /*
@@ -96,16 +108,16 @@ input[type="checkbox"]::after {
 }
 
 input[type="checkbox"]::before {
-	background-color: #FFF;
-	border-radius: 0%;
-	border: 1px solid #666464;
-	width: 20px;
-	/*チェックボックスの横幅*/
-	height: 20px;
-	/*チェックボックスの縦幅*/
-	transform: translateY(-50%);
-	top: 50%;
-	left: 5px;
+  background-color: #fff;
+  border-radius: 0%;
+  border: 1px solid #666464;
+  width: 20px;
+  /*チェックボックスの横幅*/
+  height: 20px;
+  /*チェックボックスの縦幅*/
+  transform: translateY(-50%);
+  top: 50%;
+  left: 5px;
 }
 
 input[type="checkbox"]::after {
@@ -141,17 +153,16 @@ button {
 }
 
 header {
-	top: 0;
-	position:fixed;
-	height: 84.4px;
-	width:  100%;
-	background-color: #EEEEEE;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	border-bottom: 2px solid #353238;
-
+  top: 0;
+  position: fixed;
+  height: 84.4px;
+  width: 100%;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #353238;
 }
 
 /*
@@ -159,13 +170,13 @@ header {
 */
 
 header .title {
-	letter-spacing: 0.1em;
-	font-weight: bold;
-	font-size: 30px;
-	color: #353238;
-	padding: 10px 30px;
-	background-color: #EEEEEE;
-	border-radius: 10px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 30px;
+  color: #353238;
+  padding: 10px 30px;
+  background-color: #eeeeee;
+  border-radius: 10px;
 }
 
 /*
@@ -173,13 +184,13 @@ header .title {
 */
 
 main {
-	flex: 1;
-	padding: 0 16px;
-	margin-top: 84.4px;
-	height: 80%;
-	width: 100%;
-	overflow-y: auto;
-	background-color: #EEEEEE;
+  flex: 1;
+  padding: 0 16px;
+  margin-top: 84.4px;
+  height: 80%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #eeeeee;
 }
 
 main .space {
@@ -192,29 +203,28 @@ main .space {
 */
 
 footer {
-	position:fixed;
-	bottom: 0;
-	height: 84.4px;
-	width: 100%;
-	background-color: #EEEEEE;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	border-top: 2px solid #353238;
+  position: fixed;
+  bottom: 0;
+  height: 84.4px;
+  width: 100%;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid #353238;
 }
 
 footer .submit {
-	padding: 8px 32px;
-	background-color: #EEEEEE;
-	border-radius: 10px;
-	font-weight: bold;
-	font-size: 20px;
+  padding: 8px 32px;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 20px;
 }
 #no-comment {
-	display: none;
-  }
-  #with-comment {
-	display: none;
-  }
-
+  display: none;
+}
+#with-comment {
+  display: none;
+}

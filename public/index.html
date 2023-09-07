@@ -9,11 +9,13 @@
 
   <body>
     <header>
+      <div id="user-circle" class="user-circle">UserName</div>
       <div class="title">投稿一覧</div>
       <button id="logout-button" style="position: absolute; top: 0; right: 0">
         Logout
       </button>
     </header>
+
     <main>
       <div id="get-contents">
         <!-- ここにdreamsが入ります -->
@@ -31,6 +33,10 @@
       document.addEventListener("DOMContentLoaded", () => {
         // Get the logout button by its ID
         const logoutButton = document.getElementById("logout-button");
+        const userName = localStorage.getItem("name");
+        if (userName) {
+          document.getElementById("user-circle").innerText = userName;
+        }
 
         // Add a click event listener
         logoutButton.addEventListener("click", () => {
@@ -41,6 +47,10 @@
               // If logout is successful, redirect to login.html
               if (data.success) {
                 window.location.href = "login.html";
+                localStorage.removeItem("password");
+                localStorage.removeItem("did");
+                localStorage.removeItem("key");
+                localStorage.removeItem("name");
               } else {
                 console.error("Error logging out:", data.error);
               }

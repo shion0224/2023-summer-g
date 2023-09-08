@@ -1,8 +1,9 @@
 window.onload = async () => {
-  // ログインする必要があるなら
-  const shouldLogin = localStorage.get('did') === ''
-  if (shouldLogin) {
-    window.location.href = '/'
+  // ログインする必要があるならログイン画面へ
+  const did = localStorage.getItem('did')
+  if (!did) {
+    window.location.href = '/login.html'
+    return
   }
 
   /**

@@ -6,7 +6,6 @@
   /* background-color: #6F9CEB; */
 }
 
-
 body {
   width: 100%;
   height: 100vh;
@@ -14,15 +13,10 @@ body {
   flex-direction: column;
 }
 
-
-
-
 textarea {
   width: 100%;
   height: 100px;
 }
-
-
 
 /*
 * 投稿一覧での投稿の表示
@@ -158,7 +152,6 @@ button {
   background: none;
 }
 
-
 /*
 * post-detail.htmlの中身を装飾
 */
@@ -193,6 +186,15 @@ button {
   font-weight: bold;
   border-bottom: 3px solid #666464;
   font-size: 24px;
+}
+/* Error state styling */
+.textarea-error::placeholder {
+  color: red;
+}
+
+/* Optional: Add some general styling to indicate an error, e.g., a red border */
+.textarea-error {
+  border: 1px solid red;
 }
 
 /* 名称一致しているところあるしやばくね？？
@@ -242,11 +244,9 @@ button {
   width: 150px; /* 例としての値。実際の幅に応じて変更してください */
 }
 
-
 /*
 * profile
 */
-
 
 .post-container {
   display: flex;
@@ -257,10 +257,9 @@ button {
   margin-top: 16px;
 }
 
-.post-container{
+.post-container {
   align-items: center;
 }
-
 
 /*
 * header
@@ -277,8 +276,8 @@ header {
   align-items: center;
   /* justify-content: center; */
   border-bottom: 2px solid #353238;
-  justify-content: space-between;  /* 3つの要素を等間隔に分散させる */
-  padding: 10px;     
+  justify-content: space-between; /* 3つの要素を等間隔に分散させる */
+  padding: 10px;
 }
 
 header .title {
@@ -289,10 +288,9 @@ header .title {
   padding: 10px 16px;
   /* background-color: #eeeeee; */
   border-radius: 10px;
-
 }
 
-#logout-button{
+#logout-button {
   padding: 8px 16px;
   background-color: #eeeeee;
   border-radius: 10px;
@@ -314,7 +312,6 @@ header .title {
   font-weight: bold;
   font-size: 12px;
   border: 2px solid #353238;
-
 }
 
 /*
@@ -322,17 +319,15 @@ header .title {
 */
 
 main {
-	flex: 1;
-	padding: 0 16px;
-	margin-top: 84.4px;
-	height: 80%;
-	width: 100%;
-	overflow-y: auto;
-	background-color: #bad3ff;
-	margin-bottom: 84.4px;
+  flex: 1;
+  padding: 0 16px;
+  margin-top: 84.4px;
+  height: 80%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #bad3ff;
+  margin-bottom: 84.4px;
 }
-
-
 
 /*
 * footer

@@ -1,55 +1,99 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>投稿画面</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <button id="user-circle" class="user-circle" onclick="location.href='profile.html'">UserName</button>
-        <div class="title">投稿画面</div>
-        <button id="logout-button">Logout</button>
+      <button
+        id="user-circle"
+        class="user-circle"
+        onclick="location.href='profile.html'"
+      >
+        UserName
+      </button>
+      <div class="title">投稿画面</div>
+      <button id="logout-button">Logout</button>
     </header>
     <main>
-        <div class="container">
+      <div class="container">
+        <h2 id="title">タイトル</h2>
+        <form>
+          <textarea
+            name="contents"
+            id="post-titles"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </form>
 
-            <h2 id="title">タイトル</h2>
-            <form>
-                <textarea name="contents" id="post-titles" cols="30" rows="10"></textarea>
-            </form>
+        <h2 id="dreams">夢の内容</h2>
+        <form>
+          <textarea
+            name="contents"
+            id="post-contents"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </form>
 
-            <h2 id="dreams">夢の内容</h2>
-            <form>
-                <textarea name="contents" id="post-contents" cols="30" rows="10"></textarea>
-            </form>
-
-            <h2 id="post-tag">タグ</h2>
-            <input id="check_horror" class="checkbox" type="checkbox" value="horror" />
-            <label for="check_horror">ホラー</label>
-            <input id="check_fantasy" class="checkbox" type="checkbox" value="fantasy" />
-            <label for="check_fantasy">ファンタジー</label>
-            <input id="check_love" class="checkbox" type="checkbox" value="love" />
-            <label for="check_love">恋愛</label>
-            <input id="check_human" class="checkbox" type="checkbox" value="human" />
-            <label for="check_human">人間関係</label>
-            <input id="check_comedy" class="checkbox" type="checkbox" value="comedy" />
-            <label for="check_comedy">コメディー</label>
-        </div>
+        <h2 id="post-tag">タグ</h2>
+        <input
+          id="check_horror"
+          class="checkbox"
+          type="checkbox"
+          value="ホラー"
+        />
+        <label for="check_horror">ホラー</label>
+        <input
+          id="check_fantasy"
+          class="checkbox"
+          type="checkbox"
+          value="ファンタジー"
+        />
+        <label for="check_fantasy">ファンタジー</label>
+        <input id="check_love" class="checkbox" type="checkbox" value="恋愛" />
+        <label for="check_love">恋愛</label>
+        <input
+          id="check_human"
+          class="checkbox"
+          type="checkbox"
+          value="人間関係"
+        />
+        <label for="check_human">人間関係</label>
+        <input
+          id="check_comedy"
+          class="checkbox"
+          type="checkbox"
+          value="コメディー"
+        />
+        <label for="check_somethingElse">コメディー</label>
+        <label for="check_somethingElse">その他</label>
+        <input
+          id="check_somethingElse"
+          class="checkbox"
+          type="checkbox"
+          value="その他"
+        />
+      </div>
     </main>
 
     <footer>
-        <button class="submit" id="cancel-button" onclick="location.href='index.html'">
-            キャンセル
-        </button>
-        <button type="button" class="submit" id="post-button">投稿する</button>
+      <button
+        class="submit"
+        id="cancel-button"
+        onclick="location.href='index.html'"
+      >
+        キャンセル
+      </button>
+      <button type="button" class="submit" id="post-button">投稿する</button>
     </footer>
 
     <script type="module" src="./post.js"></script>
-	<script type="module" src="./logout.js"></script>
-</body>
-
+    <script type="module" src="./logout.js"></script>
+  </body>
 </html>

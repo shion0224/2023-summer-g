@@ -137,26 +137,17 @@
           localStorage.setItem("name", name);
 
           // did password save
-          DIDAuth.savePem(did, password);
-
-          // push top
-          location.href = "/";
+          await DIDAuth.savePem(did, password)
+          setTimeout(() => {
+            location.href = "/";
+          }, 1000);
         } catch (err) {
           document.getElementById("error").innerText = err.message;
         }
       };
 
-      // DIDとパスワードの保存処理
-      document.getElementById("saveBtn").onclick = async (event) => {
-        event.preventDefault();
-
-        const did = document.getElementById("did").value;
-        const password = document.getElementById("password").value;
-        DIDAuth.savePem(did, password);
-      };
-
-      // ページ全体に対して'click'イベントリスナーを追加
-      document.addEventListener("click", function (event) {
+        // ページ全体に対して'click'イベントリスナーを追加
+        document.addEventListener('click', function(event) {
         // クリックされた要素が#myInputでない場合
         if (event.target.id !== "name") {
           document.getElementById("name").blur(); // キーボードを閉じる

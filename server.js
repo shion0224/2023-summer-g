@@ -65,7 +65,7 @@ serve(async (req) => {
       // INSERTなど、書込用SQLを実行する
       const insertResult = await mySqlClient.execute(
         `INSERT INTO dreams (title,content,tag,did) VALUES (?,?,?,?);`,
-        [titles, contents, tag,did]
+        [titles, contents, tag, did]
       );
 
       return new Response("文字です。");
@@ -85,6 +85,7 @@ serve(async (req) => {
       title: dream.title,
       content: dream.content,
       dream_id: dream.dream_id,
+      tag: dream.tag,
     }));
 
     // JSON形式でResponseを返す
@@ -183,8 +184,7 @@ serve(async (req) => {
    * profileに投稿を表示させる。
    */
 
-  if (req.method === "GET" && pathname === ("/profile")) {
-
+  if (req.method === "GET" && pathname === "/profile") {
     const sql = await mySqlClient.query(
       "SELECT * FROM dreams JOIN users ON dreams.did = users.did ORDER BY timestamp DESC  "
     );
@@ -194,6 +194,7 @@ serve(async (req) => {
       content: dream.content,
       dream_id: dream.dream_id,
       did: dream.did,
+      tag: dream.tag,
     }));
 
     // JSON形式でResponseを返す

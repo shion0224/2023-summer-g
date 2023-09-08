@@ -35,10 +35,17 @@ window.onload = async () => {
 };
 document.getElementById("post-comment-button").onclick = async () => {
   const commentContents = document.getElementById("post-contents").value;
+  const commentElement = document.getElementById("post-contents");
 
   if (!commentContents.trim()) {
-    alert("Comment cannot be empty.");
-    return;
+    commentElement.value = "";
+    commentElement.setAttribute("placeholder", "コメントを入力してください！");
+    commentElement.classList.add("textarea-error");
+    commentElement.focus();
+    return; // exit the function early
+  } else {
+    commentElement.setAttribute("placeholder", "夢の内容");
+    commentElement.classList.remove("textarea-error");
   }
 
   const dreamId = localStorage.getItem("dream_id");

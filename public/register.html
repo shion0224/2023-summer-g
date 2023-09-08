@@ -138,13 +138,10 @@
           localStorage.setItem("name", name);
 
           // did password save
-          // MEMO: pemファイルが保存されたらトップページに移動できるように
-          new Promise((resolve) => {
-            DIDAuth.savePem(did, password)
-            resolve()
-          }).then(() => { 
+          await DIDAuth.savePem(did, password)
+          setTimeout(() => {
             location.href = "/";
-           })
+          }, 1000);
         } catch (err) {
           document.getElementById("error").innerText = err.message;
         }

@@ -28,7 +28,13 @@ window.onload = async () => {
 
         const dreamTagDiv = document.createElement("div");
         dreamTagDiv.setAttribute("id", `dream-tag-detail${i}`);
-        dreamTagDiv.textContent = data[i].tag; // Tagを挿入
+        // 「ファンタジー, 恋愛, コメディー, その他」の文字を「#ファンタジー #恋愛 #コメディー その他」に変換
+        const tagsString = data[i].tag
+          .split(',')
+          .map(tag => tag.trim())
+          .map(tag => tag === 'その他' ? tag : `#${tag}`)
+          .join(' ');
+        dreamTagDiv.textContent = tagsString; // Tagを挿入
         dreamDiv.appendChild(dreamTagDiv);
 
         // dream-content1, dream-content2, ... のようなdiv要素をdreamDivの子要素として作成

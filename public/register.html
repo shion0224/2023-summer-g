@@ -139,8 +139,7 @@
           localStorage.setItem("name", name);
 
           // did password save
-          DIDAuth.savePem(did, password);
-
+          await DIDAuth.savePem(did, password);
           // push top
           location.href = "/";
         } catch (err) {

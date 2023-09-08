@@ -27,15 +27,15 @@ window.onload = async () => {
         dreamDiv.appendChild(dreamTitleDiv);
 
         const dreamTagDiv = document.createElement("div");
-        dreamTagDiv.setAttribute("id", `dream-tag-detailg${i}`);
+        dreamTagDiv.setAttribute("id", `dream-tag-detail${i}`);
         dreamTagDiv.textContent = data[i].tag; // Tagを挿入
         dreamDiv.appendChild(dreamTagDiv);
 
         // dream-content1, dream-content2, ... のようなdiv要素をdreamDivの子要素として作成
-        const dreamContentDiv = document.createElement("div");
-        dreamContentDiv.setAttribute("id", `dream-content${i}`);
-        dreamContentDiv.textContent = data[i].content; // 夢の内容を挿入
-        dreamDiv.appendChild(dreamContentDiv);
+        // const dreamContentDiv = document.createElement("div");
+        // dreamContentDiv.setAttribute("id", `dream-content${i}`);
+        // dreamContentDiv.textContent = data[i].content; // 夢の内容を挿入
+        // dreamDiv.appendChild(dreamContentDiv);
         dreamDiv.onclick = async () => {
           localStorage.setItem("dream_id", data[i].dream_id);
           console.log(data[i].dream_id);
@@ -46,5 +46,4 @@ window.onload = async () => {
       console.error("Error fetching from /post:", error);
     }
   }
-
 };

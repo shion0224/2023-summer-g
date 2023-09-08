@@ -302,7 +302,8 @@ header .title {
 }
 
 .user-circle {
-
+  overflow: hidden;
+  max-width: 30%;
   height: 70px;
   border-radius: 20px;
   background-color: #eeeeee;

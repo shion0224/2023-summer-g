@@ -27,7 +27,7 @@ window.onload = async () => {
         dreamDiv.appendChild(dreamTitleDiv);
 
         const dreamTagDiv = document.createElement("div");
-        dreamTagDiv.setAttribute("id", `dream-tag-detailg${i}`);
+        dreamTagDiv.setAttribute("id", `dream-tag-detail${i}`);
         dreamTagDiv.textContent = data[i].tag; // Tagを挿入
         dreamDiv.appendChild(dreamTagDiv);
 

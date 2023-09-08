@@ -33,7 +33,8 @@ serve(async (req) => {
     const params = new URLSearchParams(new URL(req.url).search);
     const dreamId = params.get("dream_id");
     const dreams = await mySqlClient.query(
-      "SELECT tag FROM dreams WHERE dream_id = ?"
+      "SELECT tag FROM dreams WHERE dream_id = ?",
+      [dreamId]
     );
     const tag = dreams[0]?.tag || "No tag found";
     return new Response(tag);

@@ -150,15 +150,6 @@
         }
       };
 
-      // DIDとパスワードの保存処理
-      document.getElementById("saveBtn").onclick = async (event) => {
-        event.preventDefault();
-
-        const did = document.getElementById("did").value;
-        const password = document.getElementById("password").value;
-        DIDAuth.savePem(did, password);
-      };
-
         // ページ全体に対して'click'イベントリスナーを追加
         document.addEventListener('click', function(event) {
         // クリックされた要素が#myInputでない場合

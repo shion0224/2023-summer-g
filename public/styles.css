@@ -60,13 +60,40 @@ div .dreams {
 * post.htmlの中身を
 * 中央揃えにしている。(idやクラスを洗い出し、ページごとに共通にしたほうが良い。)
 */
-#post-title,
-#post-dreams,
-#post-tag {
-  margin-left: auto;
-  margin-right: auto;
-  width: 8em;
+
+h2#title{
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: bold;
+  border-bottom: 3px solid #666464;
+  margin-bottom: 16px;
+  font-size: 24px;
 }
+
+h2#post-tag{
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: bold;
+  border-bottom: 3px solid #666464;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+#tags{
+  /* display: flex; */
+  flex-direction:row;
+  justify-content:center;
+  flex-wrap: wrap; 
+}
+
+.tag-box{
+  display: inline-block;
+}
+
+#cancel-button{
+  margin-right: 16px;
+}
+
 
 #input-title,
 #input-contents {
@@ -346,6 +373,10 @@ footer {
   border-top: 2px solid #353238;
 }
 
+#post-all{
+  margin-right: 16px;
+}
+
 footer .submit {
   padding: 8px 32px;
   background-color: #eeeeee;
@@ -353,6 +384,11 @@ footer .submit {
   border-radius: 10px;
   font-weight: bold;
   font-size: 20px;
+}
+
+button.submit{
+  /* padding-right: 16px; */
+  /* gap: 16px; */
 }
 
 footer > .jump-index {

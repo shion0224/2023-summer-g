@@ -14,10 +14,11 @@ document.getElementById("post-button").onclick = async () => {
   const tag = selectedTags.join(", ");
 
   try {
+    const did = localStorage.getItem("did");
     const response = await fetch("/dreams", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: contents, titles: titles, tag: tag }),
+      body: JSON.stringify({ contents: contents, titles: titles, tag: tag ,did: did}),
     });
     window.location.href = "/";
   } catch (error) {

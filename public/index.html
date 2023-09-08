@@ -8,7 +8,7 @@
 	<header>
 		<div id="user-circle" class="user-circle" onclick="location.href='profile.html'">UserName</div>
 		<div class="title">投稿一覧</div>
-			<button id="logout-button">Logout</button>
+		<button id="logout-button">Logout</button>
 	</header>
 
 	<main>
@@ -22,52 +22,10 @@
 			投稿する
 		</button>
 	</footer>
-	<script>
-		// When the document is fully loaded
-		document.addEventListener("DOMContentLoaded", () => {
-			// Get the logout button by its ID
-			const logoutButton = document.getElementById("logout-button");
-			const userName = localStorage.getItem("name");
-			if (userName) {
-				document.getElementById("user-circle").innerText = userName;
-			}
 
-			// Add a click event listener
-			logoutButton.addEventListener("click", () => {
-				// Call the logout API (I'm assuming you'll set up a logout endpoint in your server)
-				fetch("/users/logout", { method: "POST" })
-					.then((response) => response.json())
-					.then((data) => {
-						// If logout is successful, redirect to login.html
-						if (data.success) {
-							window.location.href = "login.html";
-							localStorage.removeItem("password");
-							localStorage.removeItem("did");
-							localStorage.removeItem("key");
-							localStorage.removeItem("name");
-						} else {
-							console.error("Error logging out:", data.error);
-						}
-					});
-			});
-		});
-	</script>
 	<script type="module" src="./index.js"></script>
-	<!-- index.html -->
-	<!-- <script type="module">
+	<script type="module" src="./logout.js"></script>
 
-      // 送信時の処理
-      document.getElementById("submit").onclick = async (event) => {
-        event.preventDefault();
-        // 名前が入力されていなければエラー
-        const name = document.getElementById("name").value;
-        if (name === "") {
-          document.getElementById("error").innerText =
-            "名前は必須パラメータです";
-          return;
-        }
-      };
-    </script> -->
 </body>
 
 </html>

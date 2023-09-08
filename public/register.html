@@ -9,7 +9,6 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
   </head>
-
   <body>
     <div style="background-color: skyblue; display: flex; padding: 16px">
       <a style="color: white; margin-right: 16px"> 新規登録 </a>
@@ -86,18 +85,8 @@
               />
             </div>
           </div>
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link" id="submit">登録</button>
-            </div>
-            <div class="control">
-              <button class="button is-primary" id="saveBtn">
-                DIDとパスワードを保存
-              </button>
-            </div>
-          </div>
         </form>
+        <button class="button is-link" id="submit">登録</button>
       </div>
     </section>
 
@@ -165,6 +154,14 @@
         const password = document.getElementById("password").value;
         DIDAuth.savePem(did, password);
       };
+
+      // ページ全体に対して'click'イベントリスナーを追加
+      document.addEventListener("click", function (event) {
+        // クリックされた要素が#myInputでない場合
+        if (event.target.id !== "name") {
+          document.getElementById("name").blur(); // キーボードを閉じる
+        }
+      });
     </script>
   </body>
 </html>

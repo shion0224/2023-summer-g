@@ -1,23 +1,143 @@
 <!DOCTYPE html>
-<html lang="ja">
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="styles.css" />
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Modern Post Feed (Deno Edition)</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            sky: {
+                                50: "#f0f9ff",
+                                100: "#e0f2fe",
+                                200: "#bae6fd",
+                                300: "#7dd3fc",
+                                400: "#38bdf8",
+                                500: "#0ea5e9",
+                                600: "#0284c7",
+                                700: "#0369a1",
+                                800: "#075985",
+                                900: "#0c4a6e",
+                            },
+                            slate: {
+                                50: "#f8fafc",
+                                100: "#f1f5f9",
+                                200: "#e2e8f0",
+                                300: "#cbd5e1",
+                                400: "#94a3b8",
+                                500: "#64748b",
+                                600: "#475569",
+                                700: "#334155",
+                                800: "#1e293b",
+                                900: "#0f172a",
+                            },
+                            emerald: {
+                                50: "#ecfdf5",
+                                100: "#d1fae5",
+                                200: "#a7f3d0",
+                                300: "#6ee7b7",
+                                400: "#34d399",
+                                500: "#10b981",
+                                600: "#059669",
+                                700: "#047857",
+                                800: "#065f46",
+                                900: "#064e3b",
+                            },
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+    <body class="bg-slate-50 font-sans">
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <div
+                class="container mx-auto px-4 py-3 flex justify-between items-center"
+            >
+                <div class="text-xl font-bold text-sky-600">PostFeed</div>
+                <div
+                    id="userSection"
+                    class="flex items-center space-x-3 hidden"
+                >
+                    <img
+                        id="userAvatar"
+                        src=""
+                        alt="User Avatar"
+                        class="w-8 h-8 rounded-full border-2 border-sky-200"
+                    />
+                    <span
+                        id="userName"
+                        class="text-sm text-slate-700 hidden sm:inline"
+                    ></span>
+                    <button
+                        id="logoutButton"
+                        class="p-2 rounded-md text-slate-600 hover:bg-slate-100 hover:text-sky-600 transition-colors"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
 
-<body>
-	<header>
-		<div id="user-circle" class="user-circle" onclick="location.href='profile.html'">UserName</div>
-		<div class="title">投稿一覧</div>
-	</header>
+        <main class="container mx-auto px-4 py-6">
+            <div id="loading" class="flex justify-center items-center h-64">
+                <div
+                    class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-sky-500"
+                ></div>
+            </div>
+            <div id="error" class="hidden text-center text-red-500 py-10"></div>
+            <div id="empty" class="hidden text-center text-slate-500 py-10">
+                No posts yet. Be the first to create one!
+            </div>
+            <div
+                id="postList"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-6 hidden"
+            ></div>
+        </main>
 
-	<main>
-		<div id="get-contents">
-			<!-- ここにdreamsが入ります -->
-		</div>
-	</main>
+        <footer
+            class="text-center py-4 text-sm text-slate-500 border-t border-slate-200 bg-white"
+        >
+            &copy; <span id="year"></span> Modern Post Feed. All rights
+            reserved.
+        </footer>
 
-	<script type="module" src="./index.js"></script>
+        <button
+            id="fab"
+            class="fixed bottom-8 right-8 bg-sky-500 hover:bg-sky-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105 z-40"
+            aria-label="Create new post"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 h-7"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                />
+            </svg>
+        </button>
 
-</body>
-
+        <script type="module" src="index.js"></script>
+    </body>
 </html>

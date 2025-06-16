@@ -16,11 +16,6 @@ const mySqlClient = await new Client().connect({
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
-  if (req.method === "POST" && pathname === "/users/logout") {
-    return new Response(JSON.stringify({ success: true }), {
-      headers: { "Content-Type": "application/json" },
-    });
-  }
 
   if (req.method === "GET" && pathname === "/dream-title") {
     const dreams = await mySqlClient.query(
@@ -181,103 +176,11 @@ serve(async (req) => {
   console.log("Attaching event to post-comment-button");
 
   /*
-   * profileに投稿を表示させる。
-   */
+  * profileに投稿を表示させる。
+  */
 
-  if (req.method === "GET" && pathname === "/profile") {
-    const sql = await mySqlClient.query(
-      "SELECT * FROM dreams JOIN users ON dreams.did = users.did ORDER BY timestamp DESC  "
-    );
-    // titleとcontentの両方を含むオブジェクトの配列を作成
-    const result = sql.map((dream) => ({
-      title: dream.title,
-      content: dream.content,
-      dream_id: dream.dream_id,
-      did: dream.did,
-      tag: dream.tag,
-    }));
+  /*
+  * ユーザー新規登録API
+  */
 
-    // JSON形式でResponseを返す
-    return new Response(JSON.stringify(result), {
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
-  // serve.js
-  // ユーザー新規登録API
-  if (req.method === "POST" && pathname === "/users/register") {
-    const json = await req.json();
-    const userName = json.name;
-    const sign = json.sign;
-    const did = json.did;
-    const message = json.message;
-
-    // 電子署名が正しいかチェック
-    try {
-      const chk = DIDAuth.verifySign(did, sign, message);
-      if (!chk) {
-        return new Response("不正な電子署名です", { status: 400 });
-      }
-    } catch (e) {
-      return new Response(e.message, { status: 500 });
-    }
-    // 既にDBにDIDが登録されているかチェック
-    try {
-      const isExists = await checkIfIdExists(did);
-      if (isExists) {
-        return Response("登録済みです", { status: 400 });
-      }
-    } catch (e) {
-      return new Response(e.message, { status: 500 });
-    }
-
-    // DBにDIDとuserNameを保存
-    try {
-      await addDID(did, userName);
-      return new Response("ok");
-    } catch (e) {
-      return new Response(e.message, { status: 500 });
-    }
-  }
-
-  //ログイン
-  if (req.method === "POST" && pathname === "/users/login") {
-    const json = await req.json();
-    const sign = json.sign;
-    const did = json.did;
-    const message = json.message;
-
-    // 電子署名が正しいかチェック
-    try {
-      const chk = DIDAuth.verifySign(did, sign, message);
-      if (!chk) {
-        return new Response("不正な電子署名です", { status: 400 });
-      }
-    } catch (e) {
-      return new Response(e.message, { status: 400 });
-    }
-
-    // DBにdidが登録されているかチェック
-    try {
-      const isExists = await checkIfIdExists(did);
-      if (!isExists) {
-        return new Response("登録されていません", { status: 400 });
-      }
-      // 登録済みであればuser情報を返す
-      const res = await getUser(did);
-      const user = { did: res.rows[0].did, name: res.rows[0].name };
-      return new Response(JSON.stringify({ user }), {
-        headers: { "Content-Type": "application/json" },
-      });
-    } catch (e) {
-      return new Response(e.message, { status: 500 });
-    }
-  }
-
-  return serveDir(req, {
-    fsRoot: "public",
-    urlRoot: "",
-    showDirListing: true,
-    enableCors: true,
-  });
 });

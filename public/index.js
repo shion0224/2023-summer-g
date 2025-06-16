@@ -1,31 +1,14 @@
 // public/index.js
 
+import { insertPost } from '../utils/db.ts';
+
 const MOCK_USER = {
   id: 'user123',
   name: 'Jane Doe',
   avatarUrl: 'https://i.pravatar.cc/150?img=3'
 };
 
-const MOCK_POSTS = [
-  {
-    id: '1',
-    userId: 'user1',
-    username: 'Alice Wonderland',
-    userAvatarUrl: 'https://picsum.photos/seed/alice/40/40',
-    title: 'Tailwind CSS v4: 新機能紹介',
-    tags: ['tailwindcss', 'css', 'webdev'],
-    timestamp: Date.now() - 1000 * 60 * 60
-  },
-  {
-    id: '2',
-    userId: 'user2',
-    username: 'Bob Builder',
-    userAvatarUrl: 'https://picsum.photos/seed/bob/40/40',
-    title: 'Denoを使ったAPI構築入門',
-    tags: ['deno', 'api', 'backend'],
-    timestamp: Date.now() - 1000 * 60 * 60 * 3
-  }
-];
+const MOCK_POSTS = [];
 
 function timeAgo(timestamp) {
   const seconds = Math.floor((Date.now() - timestamp) / 1000);
@@ -52,7 +35,8 @@ function renderPosts(posts) {
           <p class="text-xs text-slate-500">${timeAgo(post.timestamp)}</p>
         </div>
       </div>
-      <h2 class="text-xl font-semibold text-slate-800 mb-3">${post.title}</h2>
+      <h2 class="text-xl font-semibold text-slate-800 mb-2">${post.title}</h2>
+      ${post.content ? `<p class="text-sm text-slate-600 mb-3">${post.content}</p>` : ''}
       <div class="flex flex-wrap gap-2">
         ${post.tags.map(tag => `<span class="px-3 py-1 text-xs bg-emerald-100 text-emerald-700 rounded-full">#${tag}</span>`).join('')}
       </div>
@@ -68,6 +52,54 @@ function showUser(user) {
   section.classList.remove("hidden");
   document.getElementById("logoutButton").addEventListener("click", () => {
     alert("ログアウトしました（モック）");
+  });
+}
+
+function openModal() {
+  const modal = document.createElement("div");
+  modal.id = "postModal";
+  modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+  modal.innerHTML = `
+    <div class="bg-white p-6 rounded-md w-full max-w-md">
+      <h2 class="text-xl font-bold mb-4">新しい投稿</h2>
+      <form id="postForm" class="space-y-4">
+        <input type="text" id="postTitle" placeholder="タイトル" class="w-full px-3 py-2 border rounded-md" required />
+        <textarea id="postContent" placeholder="夢の内容" class="w-full px-3 py-2 border rounded-md"></textarea>
+        <input type="text" id="postTags" placeholder="タグ（カンマ区切り）" class="w-full px-3 py-2 border rounded-md" />
+        <div class="flex justify-end space-x-2">
+          <button type="button" id="cancelModal" class="px-4 py-2 bg-slate-200 rounded">キャンセル</button>
+          <button type="submit" class="px-4 py-2 bg-sky-500 text-white rounded">投稿</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  document.getElementById("cancelModal").addEventListener("click", () => {
+    modal.remove();
+  });
+
+  document.getElementById("postForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const title = document.getElementById("postTitle").value;
+    const content = document.getElementById("postContent").value;
+    const tags = document.getElementById("postTags").value.split(',').map(t => t.trim()).filter(t => t);
+    const newPost = {
+      id: String(Date.now()),
+      userId: MOCK_USER.id,
+      username: MOCK_USER.name,
+      userAvatarUrl: MOCK_USER.avatarUrl,
+      title,
+      content,
+      tags,
+      timestamp: Date.now()
+    };
+    MOCK_POSTS.unshift(newPost);
+    renderPosts(MOCK_POSTS);
+    document.getElementById("empty").classList.add("hidden");
+    document.getElementById("postList").classList.remove("hidden");
+    await insertPost(newPost); // Denoサーバーへ送信する例（要実装）
+    modal.remove();
   });
 }
 
@@ -91,9 +123,8 @@ function init() {
   }, 1000);
 
   document.getElementById("fab").addEventListener("click", () => {
-    alert("投稿作成モーダルを表示（未実装）");
+    openModal();
   });
-  console.log("aaa")
 }
 
 document.addEventListener("DOMContentLoaded", init);

@@ -1,10 +1,10 @@
 window.onload = async () => {
   // ログインする必要があるならログイン画面へ
-  const did = localStorage.getItem('did')
-  if (!did) {
-    window.location.href = '/login.html'
-    return
-  }
+  // const did = localStorage.getItem('did')
+  // if (!did) {
+  //   window.location.href = '/login.html'
+  //   return
+  // }
 
   /**
    * /index.htmlでの処理

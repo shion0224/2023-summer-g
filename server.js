@@ -233,6 +233,31 @@ if (req.method === "GET" && pathname === "/profile/posts") {
   });
 }
 
+// 現在ログインしているユーザー情報を取得
+if (req.method === "GET" && pathname === "/currentUser") {
+  const cookies = getCookies(req);
+  const userId = cookies.userId;
+
+  console.log("🔍 現在のユーザーID:", userId);
+  
+  if (!userId) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
+  const user = findUserById(userId);
+  if (!user) {
+    return new Response("User not found", { status: 404 });
+  }
+
+  return new Response(JSON.stringify({
+    id: user.id,
+    username: user.username,
+    avatarUrl: user.avatarUrl ?? "https://i.pravatar.cc/150?img=1",
+  }), {
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
   // 静的ファイル配信
   return serveDir(req, {
     fsRoot: "./public",

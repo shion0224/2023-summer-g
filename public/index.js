@@ -1,41 +1,44 @@
 // public/index.js
 
-// fetch経由でAPI POSTする挿入関数を定義
+// APIにPOSTリクエストを送信する関数
 export async function insertPost(post) {
   await fetch("/posts", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(post),
+    method: "POST", // HTTPメソッドをPOSTに設定
+    headers: { "Content-Type": "application/json" }, // JSON形式でデータを送信
+    body: JSON.stringify(post), // オブジェクトをJSON文字列に変換して送信
   });
 }
 
-
+// モックユーザー情報（仮のデータ）
 const MOCK_USER = {
   id: 'user123',
   name: 'Jane Doe',
   avatarUrl: 'https://i.pravatar.cc/150?img=3'
 };
 
+// ログアウトボタンのクリックイベントを設定
 document.getElementById("logoutButton").addEventListener("click", () => {
-  location.href = "/logout";
+  location.href = "/logout"; // ログアウトページにリダイレクト
 });
 
+// 時間を「○秒前」「○分前」などの形式で表示する関数
 function timeAgo(timestamp) {
-  const seconds = Math.floor((Date.now() - timestamp) / 1000);
-  if (seconds < 60) return `${seconds}s ago`;
+  const seconds = Math.floor((Date.now() - timestamp) / 1000); // 現在時刻との差を秒で計算
+  if (seconds < 60) return `${seconds}s ago`; // 60秒未満の場合
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return `${minutes}m ago`; // 60分未満の場合
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return `${hours}h ago`; // 24時間未満の場合
   const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+  return `${days}d ago`; // それ以上の場合
 }
 
+// 投稿リストを描画する関数
 function renderPosts(posts) {
-  const list = document.getElementById("postList");
-  list.innerHTML = '';
+  const list = document.getElementById("postList"); // 投稿リストのDOM要素を取得
+  list.innerHTML = ''; // リストを初期化
   posts.forEach(post => {
-    const card = document.createElement("div");
+    const card = document.createElement("div"); // 投稿カードを作成
     card.className = "bg-white shadow-lg rounded-xl p-5 border border-slate-200 hover:shadow-xl transition-shadow";
     card.innerHTML = `
       <div class="flex items-center mb-3">
@@ -51,22 +54,24 @@ function renderPosts(posts) {
         ${post.tags.map(tag => `<span class="px-3 py-1 text-xs bg-emerald-100 text-emerald-700 rounded-full">#${tag}</span>`).join('')}
       </div>
     `;
-    list.appendChild(card);
+    list.appendChild(card); // 投稿カードをリストに追加
   });
 }
 
+// ユーザー情報を表示する関数
 function showUser(user) {
-  const section = document.getElementById("userSection");
-  document.getElementById("userAvatar").src = user.avatarUrl;
-  document.getElementById("userName").textContent = user.name;
-  section.classList.remove("hidden");
+  const section = document.getElementById("userSection"); // ユーザーセクションのDOM要素を取得
+  document.getElementById("userAvatar").src = user.avatarUrl; // ユーザーのアバター画像を設定
+  document.getElementById("userName").textContent = user.name; // ユーザー名を設定
+  section.classList.remove("hidden"); // セクションを表示
   document.getElementById("logoutButton").addEventListener("click", () => {
-    alert("ログアウトしました");
+    alert("ログアウトしました"); // ログアウト時のアラート
   });
 }
 
+// 投稿モーダルを開く関数
 function openModal() {
-  const modal = document.createElement("div");
+  const modal = document.createElement("div"); // モーダル要素を作成
   modal.id = "postModal";
   modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
   modal.innerHTML = `
@@ -83,14 +88,16 @@ function openModal() {
       </form>
     </div>
   `;
-  document.body.appendChild(modal);
+  document.body.appendChild(modal); // モーダルをDOMに追加
 
+  // キャンセルボタンのイベントリスナー
   document.getElementById("cancelModal").addEventListener("click", () => {
-    modal.remove();
+    modal.remove(); // モーダルを削除
   });
 
+  // 投稿フォームの送信イベント
   document.getElementById("postForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // デフォルトのフォーム送信を防止
     const title = document.getElementById("postTitle").value;
     const content = document.getElementById("postContent").value;
     const tags = document.getElementById("postTags").value.split(',').map(t => t.trim()).filter(t => t);
@@ -115,48 +122,60 @@ function openModal() {
       const result = await res.json();
       document.getElementById("empty").classList.add("hidden");
       document.getElementById("postList").classList.remove("hidden");
-      renderPosts([result.post, ...window.loadedPosts]);
+      renderPosts([result.post, ...window.loadedPosts]); // 新しい投稿をリストに追加
       window.loadedPosts.unshift(result.post);
     } catch (err) {
       alert("投稿に失敗しました");
       console.error(err);
     }
 
-    document.getElementById("postModal").remove();
+    document.getElementById("postModal").remove(); // モーダルを閉じる
   });
 }
 
-function init() {
-  document.getElementById("year").textContent = new Date().getFullYear();
-  showUser(MOCK_USER);
+// 初期化関数
+async function init() {
+  document.getElementById("year").textContent = new Date().getFullYear(); // 現在の年を表示
+  // 現在ログインしているユーザー情報を取得して表示
+  try {
+    const res = await fetch("/currentUser");
+    if (!res.ok) throw new Error("ユーザー情報の取得に失敗しました");
+    const user = await res.json();
+    showUser(user); // ログインしているユーザー情報を表示
+  } catch (err) {
+    console.error(err);
+    alert("ユーザー情報の取得に失敗しました");
+  }
 
   const loading = document.getElementById("loading");
   const error = document.getElementById("error");
   const empty = document.getElementById("empty");
   const list = document.getElementById("postList");
 
+  // 投稿データを非同期で取得
   setTimeout(async () => {
     try {
       const res = await fetch("/posts");
       if (!res.ok) throw new Error("投稿取得に失敗しました");
       const posts = await res.json();
-      window.loadedPosts = posts;
-      loading.classList.add("hidden");
+      window.loadedPosts = posts; // 投稿データをグローバル変数に保存
+      loading.classList.add("hidden"); // ローディングを非表示
       if (posts.length === 0) {
-        empty.classList.remove("hidden");
+        empty.classList.remove("hidden"); // 投稿がない場合は空メッセージを表示
       } else {
-        list.classList.remove("hidden");
-        renderPosts(posts);
+        list.classList.remove("hidden"); // 投稿リストを表示
+        renderPosts(posts); // 投稿を描画
       }
     } catch (err) {
       loading.classList.add("hidden");
-      error.classList.remove("hidden");
+      error.classList.remove("hidden"); // エラーメッセージを表示
       console.error(err);
     }
   }, 1000);
 
+  // フローティングアクションボタンのクリックイベント
   document.getElementById("fab").addEventListener("click", () => {
-    openModal();
+    openModal(); // 投稿モーダルを開く
   });
 }
 

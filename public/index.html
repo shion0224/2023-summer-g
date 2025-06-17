@@ -54,47 +54,41 @@
     </head>
     <body class="bg-slate-50 font-sans">
         <header class="bg-white shadow-sm sticky top-0 z-50">
-
-            <div
-                class="container mx-auto px-4 py-3 flex justify-between items-center"
-            >
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="text-xl font-bold text-sky-600">Sleep Peep</div>
-                <div class="flex items-center space-x-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <span class="text-slate-700 font-medium">{{USERNAME}}</span>
-                </div>
-
-                <div
-                    id="userSection"
-                    class="flex items-center space-x-3 hidden"
-                >
+                <div id="userSection" class="flex items-center space-x-3 hidden">
+                    <!-- プロフィール画像 -->
                     <a href="./profile.html">
-                      <img
-                        id="userAvatar"
-                        src=""
-                        alt="User Avatar"
-                        class="w-8 h-8 rounded-full border-2 border-sky-200"
-                      />
+                        <img
+                            id="userAvatar"
+                            class="w-8 h-8 rounded-full border-2 border-sky-200"
+                            alt="User Avatar"
+                        />
                     </a>
+                    <!-- ユーザー名 -->
                     <span
                         id="userName"
-                        class="text-sm text-slate-700 hidden sm:inline"
+                        class="text-sm text-slate-700 font-medium"
                     ></span>
+                    <!-- ユーザー名を表示するためのもの。なんか微妙。 -->
+                    <div>{{USERNAME}}</div>
+                    <!-- ログアウトボタン -->
                     <button
                         id="logoutButton"
                         class="p-2 rounded-md text-slate-600 hover:bg-slate-100 hover:text-sky-600 transition-colors"
                     >
                         <svg
-                            class="w-5 h-5"
+                            xmlns="http://www.w3.org/2000/svg"
                             fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
                             stroke="currentColor"
-                            stroke-width="2"
-                            viewbox="0 0 24 24"
+                            class="w-5 h-5"
                         >
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1"
+                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-9A2.25 2.25 0 002.25 5.25v13.5A2.25 2.25 0 004.5 21h9a2.25 2.25 0 002.25-2.25V15M18 12h.008v.008H18v-.008zm-3-3l6 6m0 0l-6 6m6-6H9"
                             />
                         </svg>
                     </button>
@@ -149,4 +143,3 @@
         <script type="module" src="index.js"></script>
     </body>
 </html>
-

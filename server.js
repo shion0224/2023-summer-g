@@ -1,8 +1,14 @@
-import { serve } from "https://deno.land/std@0.194.0/http/server.ts?s=serve";
-import { serveDir } from "https://deno.land/std@0.194.0/http/file_server.ts?s=serveDir";
-import { insertPost, getAllPosts, insertUser, findUserByUsername } from "./public/utils/db.ts";
+import { serve } from "https://deno.land/std@0.194.0/http/server.ts";
+import { serveDir } from "https://deno.land/std@0.194.0/http/file_server.ts";
+import {
+  insertPost,
+  getAllPosts,
+  insertUser,
+  findUserByUsername,
+  findUserById, 
+} from "./public/utils/db.ts";
 
-// Cookie取得関数
+// Cookie取得ユーティリティ
 function getCookies(req) {
   const cookieHeader = req.headers.get("cookie");
   if (!cookieHeader) return {};
@@ -18,7 +24,7 @@ serve(async (req) => {
   const { pathname } = new URL(req.url);
   console.log("📥 Request:", pathname);
 
-  // ----- 投稿の登録 -----
+  // 投稿登録
   if (req.method === "POST" && pathname === "/posts") {
     try {
       const reqJson = await req.json();
@@ -47,7 +53,7 @@ serve(async (req) => {
     }
   }
 
-  // ----- 投稿の取得 -----
+  // 投稿取得
   if (req.method === "GET" && pathname === "/posts") {
     try {
       const posts = getAllPosts();
@@ -60,45 +66,58 @@ serve(async (req) => {
     }
   }
 
-  if (req.method === "POST" && pathname === "/login") {
-    const form = await req.formData();
-    const username = form.get("username")?.toString();
-    const password = form.get("password")?.toString();
-  
-    const user = findUserByUsername(username);
-    if (!user || user.password !== password) {
-      // ✨ ポップアップ表示のためにクエリ付きでリダイレクト
-      return new Response(null, {
-        status: 303,
-        headers: {
-          Location: "/login.html?error=1",
-        },
-      });
-    }
-  
+  // ログイン
+ if (req.method === "POST" && pathname === "/login") {
+  const form = await req.formData();
+  const username = form.get("username")?.toString().trim();
+  const password = form.get("password")?.toString().trim();
+
+  const user = findUserByUsername(username);
+  console.log("🔍 ログイン試行:", username, password);
+  console.log("🔍 見つかったユーザー:", user);
+
+  if (!user || user.password !== password) {
+    return new Response(null, {
+      status: 303,
+      headers: { Location: "/login.html?error=1" },
+    });
+  }
+
+  const headers = new Headers();
+  headers.append("Set-Cookie", "auth=true; Path=/; SameSite=Lax");
+  headers.append("Set-Cookie", `userId=${user.id}; Path=/; SameSite=Lax`);
+  headers.set("Location", "/index.html");
+
+  return new Response(null, {
+    status: 303,
+    headers,
+  });
+}
+
+
+  // ログアウト
+  if (req.method === "GET" && pathname === "/logout") {
     return new Response(null, {
       status: 303,
       headers: {
-        "Set-Cookie": "auth=true; Path=/; SameSite=Lax",
-        "Location": "/index.html",
+        "Set-Cookie": [
+          "auth=; Max-Age=0; Path=/",
+          "userId=; Max-Age=0; Path=/",
+        ],
+        "Location": "/login.html",
       },
     });
   }
-  
-  
-  
 
-  // ----- 登録ページ表示 -----
+  // 登録画面表示
   if (req.method === "GET" && pathname === "/register") {
     const html = await Deno.readTextFile("./public/register.html");
-    console.log("✅ GET /register arrived");
     return new Response(html, { headers: { "Content-Type": "text/html" } });
   }
 
-  // ----- 登録処理 -----
+  // 登録処理
   if (req.method === "POST" && pathname === "/register") {
     const form = await req.formData();
-    console.log("register done!!!!!!!!!!")
     const username = form.get("username")?.toString();
     const password = form.get("password")?.toString();
 
@@ -112,41 +131,56 @@ serve(async (req) => {
     }
 
     insertUser(username, password);
+    const user = findUserByUsername(username);
+
     return new Response(null, {
       status: 303,
       headers: {
-        "Set-Cookie": "auth=true; Path=/; SameSite=Lax",
+        "Set-Cookie": [
+          "auth=true; Path=/; SameSite=Lax",
+          `userId=${user.id}; Path=/; SameSite=Lax`,
+        ],
         "Location": "/index.html",
       },
     });
   }
 
-  // ----- index.html にアクセスする場合は Cookie チェック -----
-  if (pathname === "/index.html") {
+  // / → /index.html へリダイレクト
+  if (req.method === "GET" && pathname === "/") {
+    return new Response(null, {
+      status: 303,
+      headers: { Location: "/index.html" },
+    });
+  }
+
+  // 認証付き index.html 表示処理
+  if (req.method === "GET" && pathname === "/index.html") {
     const cookies = getCookies(req);
-    if (cookies.auth !== "true") {
+    console.log("🔍 Cookie:", cookies);
+
+    if (cookies.auth !== "true" || !cookies.userId) {
+      console.log("🔒 認証されていない → /login.html にリダイレクト");
       return new Response(null, {
         status: 303,
         headers: { Location: "/login.html" },
       });
     }
-  }
 
-    // ✅ ✅ ✅ 保護された `/index.html` の処理
-    if (req.method === "GET" && pathname === "/index.html") {
-      const cookies = getCookies(req);
-      if (cookies.auth !== "true") {
-        return new Response(null, {
-          status: 303,
-          headers: { Location: "/login.html" },
-        });
-      }
-  
-      const html = await Deno.readTextFile("./public/index.html");
-      return new Response(html, { headers: { "Content-Type": "text/html" } });
+    const user = findUserById(cookies.userId);
+    if (!user) {
+      return new Response(null, {
+        status: 303,
+        headers: { Location: "/login.html" },
+      });
     }
 
-  // ----- 静的ファイル配信 -----
+    let html = await Deno.readTextFile("./public/index.html");
+    html = html.replaceAll("{{USERNAME}}", user.username);
+
+    return new Response(html, { headers: { "Content-Type": "text/html" } });
+  }
+
+  // 静的ファイル配信
   return serveDir(req, {
     fsRoot: "./public",
     urlRoot: "",

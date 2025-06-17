@@ -124,4 +124,8 @@ export function findUserByUsername(username: string): { id: string; username: st
   const result = stmt.get(username) as { id: string; username: string; password: string } | undefined;
   return result ?? null;
 }
-
+export function findUserById(id) {
+  const stmt = db.prepare("SELECT id, username FROM users WHERE id = ?");
+  const result = stmt.get(id);
+  return result ?? null;
+}

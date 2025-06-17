@@ -1,5 +1,5 @@
 {
-  "version": "4",
+  "version": "5",
   "remote": {
     "https://deno.land/std@0.104.0/_util/assert.ts": "2f868145a042a11d5ad0a3c748dcf580add8a0dbc0e876eaa0026303a5488f58",
     "https://deno.land/std@0.104.0/async/deadline.ts": "1d6ac7aeaee22f75eb86e4e105d6161118aad7b41ae2dd14f4cfd3bf97472b93",
@@ -51,6 +51,7 @@
     "https://deno.land/std@0.194.0/fmt/bytes.ts": "f29cf69e0791d375f9f5d94ae1f0641e5a03b975f32ddf86d70f70fdf37e7b6a",
     "https://deno.land/std@0.194.0/fmt/colors.ts": "d67e3cd9f472535241a8e410d33423980bec45047e343577554d3356e1f0ef4e",
     "https://deno.land/std@0.194.0/http/etag.ts": "6ad8abbbb1045aabf2307959a2c5565054a8bf01c9824ddee836b1ff22706a58",
+    "https://deno.land/std@0.194.0/http/file_server.ts": "2349d927be838b32a965ba435d0e8351932b79186fa582ea2d7168b6b53ba36e",
     "https://deno.land/std@0.194.0/http/file_server.ts?s=serveDir": "2349d927be838b32a965ba435d0e8351932b79186fa582ea2d7168b6b53ba36e",
     "https://deno.land/std@0.194.0/http/http_status.ts": "8a7bcfe3ac025199ad804075385e57f63d055b2aed539d943ccc277616d6f932",
     "https://deno.land/std@0.194.0/http/server.ts": "1b23463b5b36e4eebc495417f6af47a6f7d52e3294827a1226d2a1aab23d9d20",

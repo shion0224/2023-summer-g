@@ -9,11 +9,16 @@ export async function insertPost(post) {
   });
 }
 
+
 const MOCK_USER = {
   id: 'user123',
   name: 'Jane Doe',
   avatarUrl: 'https://i.pravatar.cc/150?img=3'
 };
+
+document.getElementById("logoutButton").addEventListener("click", () => {
+  location.href = "/logout";
+});
 
 function timeAgo(timestamp) {
   const seconds = Math.floor((Date.now() - timestamp) / 1000);

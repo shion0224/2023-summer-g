@@ -1,8 +1,8 @@
-// db.ts
 import { DatabaseSync } from "node:sqlite";
-// データベースファイルを開く（なければ自動で作成）
+
 const db = new DatabaseSync("./public/utils/posts.db");
-// テーブル作成
+
+// 投稿テーブル作成
 db.exec(`
   CREATE TABLE IF NOT EXISTS posts (
     id TEXT PRIMARY KEY,
@@ -13,6 +13,15 @@ db.exec(`
     content TEXT,
     tags TEXT,
     timestamp INTEGER
+  );
+`);
+
+// ユーザーテーブル作成
+db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    id TEXT PRIMARY KEY,
+    username TEXT UNIQUE,
+    password TEXT
   );
 `);
 
@@ -62,7 +71,7 @@ export function getAllPosts() {
   }));
 }
 
-// 初期データを投入する関数
+// 初期データ投入
 export function seedInitialPosts() {
   const existing = db.prepare("SELECT COUNT(*) FROM posts");
   const count = existing[0][0] as number;
@@ -95,3 +104,24 @@ export function seedInitialPosts() {
     insertPost(post);
   }
 }
+
+//
+// 🔽 新規追加：ユーザー登録・検索
+//
+
+// ユーザー登録
+export function insertUser(username: string, password: string) {
+  const stmt = db.prepare(`
+    INSERT INTO users (id, username, password)
+    VALUES (?, ?, ?)
+  `);
+  stmt.run(crypto.randomUUID(), username, password);
+}
+
+// ユーザー名検索（ログイン・登録時に使用）
+export function findUserByUsername(username: string): { id: string; username: string; password: string } | null {
+  const stmt = db.prepare("SELECT id, username, password FROM users WHERE username = ?");
+  const result = stmt.get(username) as { id: string; username: string; password: string } | undefined;
+  return result ?? null;
+}
+

@@ -2,30 +2,55 @@
 <html lang="ja">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="styles.css" />
-	<title>プロフィール画面</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>プロフィール</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primary: '#1DA1F2',
+					},
+				},
+			},
+		};
+	</script>
 </head>
 
-<header>
-    <div id="user-circle" class="user-circle" onclick="location.href='profile.html'">UserName</div>
-	<div class="title">自分の投稿</div>
-    <button id="logout-button">Logout</button>
-</header>
+<body class="bg-slate-50 font-sans">
+	<!-- Header -->
+	<header class="bg-white shadow-sm sticky top-0 z-50">
+		<div class="container mx-auto px-4 py-3 flex justify-between items-center">
+			<h1 class="text-xl font-bold text-gray-800">プロフィールページ</h1>
+			<a href="/index.html" class="text-primary hover:underline">ホームに戻る</a>
+		</div>
+	</header>
 
-<body>
-	<main>
-        <div class="post-container"></div>
+	<!-- Main Content -->
+	<main class="container mx-auto px-4 py-6">
+		<div class="bg-white shadow-lg rounded-lg p-6 max-w-md mx-auto">
+			<div class="flex flex-col items-center">
+				<img id="avatar" src="https://i.pravatar.cc/150?img=3" alt="ユーザーアイコン"
+					class="w-24 h-24 rounded-full border-4 border-primary mb-4">
+				<h2 id="username" class="text-2xl font-semibold text-gray-800"></h2>
+				<p id="userDetails" class="text-gray-600 mt-2"></p>
+			</div>
+		</div>
 	</main>
 
-	<footer>
-		<button onclick="location.href='index.html'" id="post-all" class="submit">投稿一覧</button>
-        <button class="submit" onclick="location.href='post.html'">新規投稿</button>
+	<!-- Footer -->
+	<footer class="text-center py-4 text-sm text-slate-500 border-t border-slate-200 bg-white">
+		&copy; <span id="year"></span> Modern Post Feed. All rights reserved.
 	</footer>
 
-	<script type="module" src="./profile.js"></script>
-	<script type="module" src="./logout.js"></script>
+	<script>
+		// フッターの年を動的に設定
+		document.getElementById("year").textContent = new Date().getFullYear();
+	</script>
+
+	<script type="module" src="profile.js"></script>
 </body>
 
 </html>

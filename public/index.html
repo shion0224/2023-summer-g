@@ -54,22 +54,28 @@
     </head>
     <body class="bg-slate-50 font-sans">
         <header class="bg-white shadow-sm sticky top-0 z-50">
-            <h1>ようこそ、{{USERNAME}} さん！</h1>
 
             <div
                 class="container mx-auto px-4 py-3 flex justify-between items-center"
             >
-                <div class="text-xl font-bold text-sky-600">PostFeed</div>
+                <div class="text-xl font-bold text-sky-600">Sleep Peep</div>
+                <div class="flex items-center space-x-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <span class="text-slate-700 font-medium">{{USERNAME}}</span>
+                </div>
+
                 <div
                     id="userSection"
                     class="flex items-center space-x-3 hidden"
                 >
-                    <img
+                    <a href="./profile.html">
+                      <img
                         id="userAvatar"
                         src=""
                         alt="User Avatar"
                         class="w-8 h-8 rounded-full border-2 border-sky-200"
-                    />
+                      />
+                    </a>
                     <span
                         id="userName"
                         class="text-sm text-slate-700 hidden sm:inline"

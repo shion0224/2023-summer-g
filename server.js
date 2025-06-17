@@ -180,6 +180,27 @@ serve(async (req) => {
     return new Response(html, { headers: { "Content-Type": "text/html" } });
   }
 
+  // プロフィール取得
+if (req.method === "GET" && pathname === "/profile") {
+  const cookies = getCookies(req);
+  const userId = cookies.userId;
+  if (!userId) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+  const user = findUserById(userId);
+  if (!user) {
+    return new Response("User not found", { status: 404 });
+  }
+  return new Response(JSON.stringify({
+    id: user.id,
+    username: user.username,
+    avatarUrl: user.avatarUrl ?? "https://i.pravatar.cc/150?img=1",
+    // 他のプロフィール情報も必要に応じて追加
+  }), {
+    headers: { "Content-Type": "application/json" }
+  });
+}
+
   // 静的ファイル配信
   return serveDir(req, {
     fsRoot: "./public",

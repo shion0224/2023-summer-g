@@ -1,14 +1,19 @@
 // public/index.js
 
-import { insertPost } from '../utils/db.ts';
+// fetch経由でAPI POSTする挿入関数を定義
+export async function insertPost(post) {
+  await fetch("/posts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(post),
+  });
+}
 
 const MOCK_USER = {
   id: 'user123',
   name: 'Jane Doe',
   avatarUrl: 'https://i.pravatar.cc/150?img=3'
 };
-
-const MOCK_POSTS = [];
 
 function timeAgo(timestamp) {
   const seconds = Math.floor((Date.now() - timestamp) / 1000);
@@ -94,11 +99,16 @@ function openModal() {
       tags,
       timestamp: Date.now()
     };
-    MOCK_POSTS.unshift(newPost);
-    renderPosts(MOCK_POSTS);
-    document.getElementById("empty").classList.add("hidden");
-    document.getElementById("postList").classList.remove("hidden");
-    await insertPost(newPost); // Denoサーバーへ送信する例（要実装）
+    try {
+      await insertPost(newPost);
+      document.getElementById("empty").classList.add("hidden");
+      document.getElementById("postList").classList.remove("hidden");
+      renderPosts([newPost, ...window.loadedPosts]);
+      window.loadedPosts.unshift(newPost);
+    } catch (err) {
+      alert("投稿に失敗しました");
+      console.error(err);
+    }
     modal.remove();
   });
 }
@@ -112,13 +122,23 @@ function init() {
   const empty = document.getElementById("empty");
   const list = document.getElementById("postList");
 
-  setTimeout(() => {
-    loading.classList.add("hidden");
-    if (MOCK_POSTS.length === 0) {
-      empty.classList.remove("hidden");
-    } else {
-      list.classList.remove("hidden");
-      renderPosts(MOCK_POSTS);
+  setTimeout(async () => {
+    try {
+      const res = await fetch("/posts");
+      if (!res.ok) throw new Error("投稿取得に失敗しました");
+      const posts = await res.json();
+      window.loadedPosts = posts;
+      loading.classList.add("hidden");
+      if (posts.length === 0) {
+        empty.classList.remove("hidden");
+      } else {
+        list.classList.remove("hidden");
+        renderPosts(posts);
+      }
+    } catch (err) {
+      loading.classList.add("hidden");
+      error.classList.remove("hidden");
+      console.error(err);
     }
   }, 1000);
 

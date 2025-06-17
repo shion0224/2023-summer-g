@@ -1,7 +1,7 @@
 // db.ts
 import { DatabaseSync } from "node:sqlite";
 // データベースファイルを開く（なければ自動で作成）
-const db = new DatabaseSync("posts.db");
+const db = new DatabaseSync("./public/utils/posts.db");
 // テーブル作成
 db.exec(`
   CREATE TABLE IF NOT EXISTS posts (
@@ -60,4 +60,38 @@ export function getAllPosts() {
     tags: row.tags ? row.tags.split(",") : [],
     timestamp: row.timestamp,
   }));
+}
+
+// 初期データを投入する関数
+export function seedInitialPosts() {
+  const existing = db.prepare("SELECT COUNT(*) FROM posts");
+  const count = existing[0][0] as number;
+  if (count > 0) return;
+
+  const initialPosts = [
+    {
+      id: "init-1",
+      userId: "user001",
+      username: "初期ユーザー1",
+      userAvatarUrl: "https://i.pravatar.cc/150?img=10",
+      title: "最初の投稿",
+      content: "これは初期データとして追加された投稿です。",
+      tags: ["初期", "テスト"],
+      timestamp: Date.now() - 10000000,
+    },
+    {
+      id: "init-2",
+      userId: "user002",
+      username: "初期ユーザー2",
+      userAvatarUrl: "https://i.pravatar.cc/150?img=11",
+      title: "２番目の投稿",
+      content: "これも初期データです。",
+      tags: ["スタート"],
+      timestamp: Date.now() - 5000000,
+    },
+  ];
+
+  for (const post of initialPosts) {
+    insertPost(post);
+  }
 }

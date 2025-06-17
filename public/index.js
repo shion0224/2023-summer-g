@@ -61,7 +61,7 @@ function showUser(user) {
   document.getElementById("userName").textContent = user.name;
   section.classList.remove("hidden");
   document.getElementById("logoutButton").addEventListener("click", () => {
-    alert("ログアウトしました（モック）");
+    alert("ログアウトしました");
   });
 }
 
@@ -94,27 +94,35 @@ function openModal() {
     const title = document.getElementById("postTitle").value;
     const content = document.getElementById("postContent").value;
     const tags = document.getElementById("postTags").value.split(',').map(t => t.trim()).filter(t => t);
+
     const newPost = {
-      id: String(Date.now()),
-      userId: MOCK_USER.id,
-      username: MOCK_USER.name,
-      userAvatarUrl: MOCK_USER.avatarUrl,
       title,
       content,
       tags,
-      timestamp: Date.now()
     };
+
     try {
-      await insertPost(newPost);
+      const res = await fetch("/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPost),
+      });
+
+      if (!res.ok) {
+        throw new Error("投稿に失敗しました");
+      }
+
+      const result = await res.json();
       document.getElementById("empty").classList.add("hidden");
       document.getElementById("postList").classList.remove("hidden");
-      renderPosts([newPost, ...window.loadedPosts]);
-      window.loadedPosts.unshift(newPost);
+      renderPosts([result.post, ...window.loadedPosts]);
+      window.loadedPosts.unshift(result.post);
     } catch (err) {
       alert("投稿に失敗しました");
       console.error(err);
     }
-    modal.remove();
+
+    document.getElementById("postModal").remove();
   });
 }
 

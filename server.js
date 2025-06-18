@@ -143,7 +143,8 @@ serve(async (req) => {
       return new Response("ユーザー名はすでに使用されています。", { status: 400 });
     }
 
-    insertUser(username, password);
+    const randomAvatarUrl = `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 10) + 1}`;
+    insertUser(username, password, randomAvatarUrl);
     const user = findUserByUsername(username);
 
     return new Response(null, {
@@ -153,7 +154,7 @@ serve(async (req) => {
           "auth=true; Path=/; SameSite=Lax",
           `userId=${user.id}; Path=/; SameSite=Lax`,
         ],
-        "Location": "/index.html",
+        "Location": "/login.html",
       },
     });
   }
@@ -239,7 +240,7 @@ if (req.method === "GET" && pathname === "/currentUser") {
   const userId = cookies.userId;
 
   console.log("🔍 現在のユーザーID:", userId);
-  
+
   if (!userId) {
     return new Response("Unauthorized", { status: 401 });
   }

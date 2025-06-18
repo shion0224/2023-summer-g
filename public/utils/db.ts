@@ -20,10 +20,12 @@ db.exec(`
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id TEXT PRIMARY KEY,
-    username TEXT UNIQUE,
-    password TEXT
+    username TEXT,
+    password TEXT,
+    avatarUrl TEXT
   );
 `);
+
 
 // 投稿の追加
 export function insertPost(post: {
@@ -110,13 +112,11 @@ export function seedInitialPosts() {
 //
 
 // ユーザー登録
-export function insertUser(username: string, password: string) {
-  const stmt = db.prepare(`
-    INSERT INTO users (id, username, password)
-    VALUES (?, ?, ?)
-  `);
-  stmt.run(crypto.randomUUID(), username, password);
+export function insertUser(username: string, password: string, avatarUrl: string) {
+  const stmt = db.prepare("INSERT INTO users (id, username, password, avatarUrl) VALUES (?, ?, ?, ?)");
+  stmt.run(crypto.randomUUID(), username, password, avatarUrl);
 }
+
 
 // ユーザー名検索（ログイン・登録時に使用）
 export function findUserByUsername(username: string): { id: string; username: string; password: string } | null {

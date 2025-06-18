@@ -9,13 +9,6 @@ export async function insertPost(post) {
   });
 }
 
-// モックユーザー情報（仮のデータ）
-const MOCK_USER = {
-  id: 'user123',
-  name: 'Jane Doe',
-  avatarUrl: 'https://i.pravatar.cc/150?img=3'
-};
-
 // ログアウトボタンのクリックイベントを設定
 document.getElementById("logoutButton").addEventListener("click", () => {
   location.href = "/logout"; // ログアウトページにリダイレクト
@@ -62,11 +55,9 @@ function renderPosts(posts) {
 function showUser(user) {
   const section = document.getElementById("userSection"); // ユーザーセクションのDOM要素を取得
   document.getElementById("userAvatar").src = user.avatarUrl; // ユーザーのアバター画像を設定
+  console.log("User Avatar URL:", user); // デバッグ用にアバターURLを表示
   document.getElementById("userName").textContent = user.name; // ユーザー名を設定
   section.classList.remove("hidden"); // セクションを表示
-  document.getElementById("logoutButton").addEventListener("click", () => {
-    alert("ログアウトしました"); // ログアウト時のアラート
-  });
 }
 
 // 投稿モーダルを開く関数

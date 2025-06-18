@@ -1,46 +1,112 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>ユーザー登録</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
-    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md w-full max-w-md">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">新規登録</h2>
-      <form action="/register" method="POST" class="space-y-4">
-        <div>
-          <label for="username" class="block text-sm font-medium text-gray-700">ユーザー名</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
-          />
+    <head>
+        <meta charset="UTF-8" />
+        <title>ユーザー登録</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body
+        class="bg-gray-100 min-h-screen flex items-center justify-center px-4"
+    >
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md w-full max-w-md">
+            <h2
+                class="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800"
+            >
+                新規登録
+            </h2>
+            <form action="/register" method="POST" class="space-y-4">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                        >アバター画像を選択</label
+                    >
+                    <div class="flex space-x-4">
+                        <label>
+                            <input
+                                type="radio"
+                                name="avatarUrl"
+                                value="https://i.pravatar.cc/150?img=5"
+                                required
+                                class="hidden peer"
+                            />
+                            <img
+                                src="https://i.pravatar.cc/150?img=5"
+                                alt="Avatar 5"
+                                class="w-16 h-16 rounded-full border-2 border-transparent peer-checked:border-blue-500"
+                            />
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="avatarUrl"
+                                value="https://i.pravatar.cc/150?img=6"
+                                required
+                                class="hidden peer"
+                            />
+                            <img
+                                src="https://i.pravatar.cc/150?img=6"
+                                alt="Avatar 6"
+                                class="w-16 h-16 rounded-full border-2 border-transparent peer-checked:border-blue-500"
+                            />
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="avatarUrl"
+                                value="https://i.pravatar.cc/150?img=7"
+                                required
+                                class="hidden peer"
+                            />
+                            <img
+                                src="https://i.pravatar.cc/150?img=7"
+                                alt="Avatar 7"
+                                class="w-16 h-16 rounded-full border-2 border-transparent peer-checked:border-blue-500"
+                            />
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label
+                        for="username"
+                        class="block text-sm font-medium text-gray-700"
+                        >ユーザー名</label
+                    >
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
+                </div>
+                <div>
+                    <label
+                        for="password"
+                        class="block text-sm font-medium text-gray-700"
+                        >パスワード</label
+                    >
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
+                </div>
+                <button
+                    type="submit"
+                    class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition"
+                >
+                    登録する
+                </button>
+            </form>
+            <p class="mt-4 text-center text-sm text-gray-600">
+                すでにアカウントをお持ちですか？
+                <a href="/login.html" class="text-blue-500 underline"
+                    >ログインページへ</a
+                >
+            </p>
         </div>
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">パスワード</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
-          />
-        </div>
-        <button
-          type="submit"
-          class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition"
-        >
-          登録する
-        </button>
-      </form>
-      <p class="mt-4 text-center text-sm text-gray-600">
-        すでにアカウントをお持ちですか？
-        <a href="/login.html" class="text-blue-500 underline">ログインページへ</a>
-      </p>
-    </div>
-  </body>
+    </body>
 </html>

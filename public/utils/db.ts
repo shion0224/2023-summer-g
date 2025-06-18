@@ -120,12 +120,12 @@ export function insertUser(username: string, password: string, avatarUrl: string
 
 // ユーザー名検索（ログイン・登録時に使用）
 export function findUserByUsername(username: string): { id: string; username: string; password: string } | null {
-  const stmt = db.prepare("SELECT id, username, password FROM users WHERE username = ?");
+  const stmt = db.prepare("SELECT id, username,password, avatarUrl FROM users WHERE username = ?");
   const result = stmt.get(username) as { id: string; username: string; password: string } | undefined;
   return result ?? null;
 }
 export function findUserById(id) {
-  const stmt = db.prepare("SELECT id, username FROM users WHERE id = ?");
+  const stmt = db.prepare("SELECT id, username ,password, avatarUrl FROM users WHERE id = ?");
   const result = stmt.get(id);
   return result ?? null;
 }

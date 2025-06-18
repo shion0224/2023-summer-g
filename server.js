@@ -48,7 +48,7 @@ serve(async (req) => {
         id: crypto.randomUUID(),
         userId: user.id,
         username: user.username,
-        userAvatarUrl: user.avatarUrl || "https://i.pravatar.cc/150?img=1",
+        userAvatarUrl: user.avatarUrl,
         title: reqJson.title,
         content: reqJson.content,
         tags: reqJson.tags || [],
@@ -107,7 +107,6 @@ serve(async (req) => {
   });
 }
 
-
   // ログアウト
   if (req.method === "GET" && pathname === "/logout") {
     return new Response(null, {
@@ -142,9 +141,8 @@ serve(async (req) => {
     if (existing) {
       return new Response("ユーザー名はすでに使用されています。", { status: 400 });
     }
-
-    const randomAvatarUrl = `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 10) + 1}`;
-    insertUser(username, password, randomAvatarUrl);
+    const avatarUrl = form.get("avatarUrl")?.toString().trim();
+    insertUser(username, password, avatarUrl);
     const user = findUserByUsername(username);
 
     return new Response(null, {
@@ -211,7 +209,7 @@ if (req.method === "GET" && pathname === "/profile") {
   return new Response(JSON.stringify({
     id: user.id,
     username: user.username,
-    avatarUrl: user.avatarUrl ?? "https://i.pravatar.cc/150?img=1",
+    avatarUrl: user.avatarUrl,
   }), {
     headers: { "Content-Type": "application/json" },
   });
@@ -237,28 +235,19 @@ if (req.method === "GET" && pathname === "/profile/posts") {
 // 現在ログインしているユーザー情報を取得
 if (req.method === "GET" && pathname === "/currentUser") {
   const cookies = getCookies(req);
-  const userId = cookies.userId;
-
-  console.log("🔍 現在のユーザーID:", userId);
-
-  if (!userId) {
-    return new Response("Unauthorized", { status: 401 });
+  if (!cookies.auth || !cookies.userId) {
+    return new Response("Not authenticated", { status: 401 });
   }
 
-  const user = findUserById(userId);
+  const user = findUserById(cookies.userId);
   if (!user) {
     return new Response("User not found", { status: 404 });
   }
 
-  return new Response(JSON.stringify({
-    id: user.id,
-    username: user.username,
-    avatarUrl: user.avatarUrl ?? "https://i.pravatar.cc/150?img=1",
-  }), {
+  return new Response(JSON.stringify(user), {
     headers: { "Content-Type": "application/json" },
   });
 }
-
   // 静的ファイル配信
   return serveDir(req, {
     fsRoot: "./public",

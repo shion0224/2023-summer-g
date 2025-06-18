@@ -5,6 +5,7 @@ https://sleep-peep.deno.dev/
 問題点
 ・register.htmlで登録した後にindex.htmlにログインの詳細が反映されない
 →registerからloginへ飛ぶようにして解決
+
 ・login.htmlからregister.htmlにページの遷移ができない。
 ・ユーザー登録の際に画像登録ができない。
 →画像を保存するデータベースの構造にしなければならない。SQliteで可能？

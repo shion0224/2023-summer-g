@@ -1,44 +1,80 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <title>ログイン</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
-  <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md w-full max-w-md">
-    <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">ログイン</h2>
-    <form action="/login" method="POST" class="space-y-4">
-      <div>
-        <label for="username" class="block text-sm font-medium text-gray-700">ユーザー名</label>
-        <input type="text" id="username" name="username" required
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200" />
-      </div>
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700">パスワード</label>
-        <input type="password" id="password" name="password" required
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200" />
-      </div>
-      <button type="submit"
-        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
-        ログイン
-      </button>
-    </form>
-    <!-- エラーメッセージ用のポップアップ -->
-    <div id="errorPopup"
-      class="hidden mt-6 text-red-600 bg-red-100 border border-red-400 px-4 py-3 rounded relative"
-      role="alert">
-      <strong class="font-bold">ログインに失敗しました！</strong>
-    </div>
-  </div>
+    <head>
+        <meta charset="UTF-8" />
+        <title>ログイン</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body
+        class="bg-gray-100 min-h-screen flex items-center justify-center px-4"
+    >
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md w-full max-w-md">
+            <h2
+                class="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800"
+            >
+                ログイン
+            </h2>
+            <form action="/login" method="POST" class="space-y-4">
+                <div>
+                    <label
+                        for="username"
+                        class="block text-sm font-medium text-gray-700"
+                        >ユーザー名</label
+                    >
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+                    />
+                </div>
+                <div>
+                    <label
+                        for="password"
+                        class="block text-sm font-medium text-gray-700"
+                        >パスワード</label
+                    >
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+                    />
+                </div>
+                <button
+                    type="submit"
+                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
+                >
+                    ログイン
+                </button>
+            </form>
+            <p class="mt-4 text-center text-sm text-gray-600">
+                アカウントをお持ちでないですか？
+                <a href="/register.html" class="text-blue-500 underline"
+                    >新規登録はこちら</a
+                >
+            </p>
+            <!-- エラーメッセージ用のポップアップ -->
+            <div
+                id="errorPopup"
+                class="hidden mt-6 text-red-600 bg-red-100 border border-red-400 px-4 py-3 rounded relative"
+                role="alert"
+            >
+                <strong class="font-bold">ログインに失敗しました！</strong>
+            </div>
+        </div>
 
-  <script>
-    // URLクエリパラメータに ?error=1 があれば表示
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("error") === "1") {
-      document.getElementById("errorPopup").classList.remove("hidden");
-    }
-  </script>
-</body>
+        <script>
+            // URLクエリパラメータに ?error=1 があれば表示
+            const params = new URLSearchParams(window.location.search);
+            if (params.get("error") === "1") {
+                document
+                    .getElementById("errorPopup")
+                    .classList.remove("hidden");
+            }
+        </script>
+    </body>
 </html>

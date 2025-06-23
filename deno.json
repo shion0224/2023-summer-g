@@ -42,5 +42,9 @@
     "install": "deno install --allow-net --allow-read --allow-write server.js",
     "start:secure": "deno run --allow-net=localhost:8000 --allow-read=./public,./posts.db --allow-write=./posts.db server.js",
     "dev:secure": "deno run --allow-net=localhost:8000 --allow-read=./public,./posts.db --allow-write=./posts.db --watch server.js"
+  },
+  "deploy": {
+    "project": "new-sleep-peep",
+    "exclude": ["node_modules/", "posts.db", ".git/", "*.log"]
   }
 } 
